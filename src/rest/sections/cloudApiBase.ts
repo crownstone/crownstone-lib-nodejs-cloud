@@ -1,5 +1,5 @@
 import {request} from '../cloudCore'
-const LOG = require('debug-level')('cloud-api-base')
+const LOG = require('debug-level')('crownstone-cloud-api-base')
 
 export const defaultHeaders = {
 'Accept': 'application/json',

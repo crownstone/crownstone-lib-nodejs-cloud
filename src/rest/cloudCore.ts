@@ -2,10 +2,9 @@ import {Util} from "../util/Util";
 
 import { prepareEndpointAndBody } from './cloudUtil'
 import { defaultHeaders } from './sections/cloudApiBase'
-import {CLOUD_ADDRESS} from "../index";
-const LOG = require('debug-level')('cloud-core')
+import {CLOUD_ADDRESS} from "../CrownstoneCloud";
+const LOG = require('debug-level')('crownstone-cloud-core')
 import fetch from 'cross-fetch';
-
 
 /**
  *
@@ -87,7 +86,6 @@ export function request(
           reject('Network request to ' + CLOUD_ADDRESS + endPoint + ' failed')
       },
     20000);
-
     fetch(url, requestConfig as any)
       .catch((connectionError) => {
         if (stopRequest === false) {
