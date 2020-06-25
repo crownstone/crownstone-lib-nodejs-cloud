@@ -1,0 +1,43 @@
+{
+  "name": "crownstone-cloud",
+  "version": "0.4.0",
+  "scripts": {
+    "start": "tsc -watch",
+    "test": "jest --useStderr --clearMocks",
+    "cleanTest": "jest --useStderr --no-cache --clearMocks"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "sha-1": "~0.1.1",
+    "debug-level": "^0.3.1",
+    "crownstone-core": "file:../crownstone-lib-nodejs-core",
+    "cross-fetch": "^3.0.4"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "@types/jest": "^25.1.1",
+    "@types/node": "^13.5.3",
+    "typescript": "3.7.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./tests/jest_preprocessor.js"
+    },
+    "testMatch": [
+      "**/tests/*.test.+(ts|tsx|js)"
+    ],
+    "setupFiles": [
+      "./tests/jest_setup.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": []
+  },
+  "license": "MIT"
+}
