@@ -1,28 +1,24 @@
-interface spheres {
-    updateSphere: (cloudSphereId: string, data: any, background?: boolean) => any;
+interface spheres_cloudModule {
+    updateSphere: (cloudSphereId: string, data: any) => any;
     inviteUser: (email: any, permission?: string) => any;
-    getPendingSphereInvites: (background?: boolean) => any;
-    resendInvite: (email: any, background?: boolean) => any;
-    revokeInvite: (email: any, background?: boolean) => any;
+    getPendingSphereInvites: () => any;
+    resendInvite: (email: any) => any;
+    revokeInvite: (email: any) => any;
     /**
      *
      * @returns {*}
      */
-    getSpheres: (background?: boolean) => any;
-    getUsers: (background?: boolean) => any;
-    getAdmins: (background?: boolean) => any;
-    getMembers: (background?: boolean) => any;
-    getGuests: (background?: boolean) => any;
-    getToons: (background?: boolean) => any;
-    getPresentPeople: (ignoreDeviceId: string, background?: boolean) => any;
-    /**
-     * @param data
-     * @param background
-     */
-    createSphere: (data: any, background?: boolean) => any;
+    getSpheres: () => any;
+    getUsers: () => any;
+    getAdmins: () => any;
+    getMembers: () => any;
+    getGuests: () => any;
+    getToons: () => any;
+    getPresentPeople: (ignoreDeviceId: string) => any;
+    createSphere: (data: any) => any;
     changeSphereName: (sphereName: any) => any;
-    changeUserAccess: (email: any, accessLevel: any, background?: boolean) => any;
-    updateFloatingLocationPosition: (data: any, background?: boolean) => any;
+    changeUserAccess: (email: any, accessLevel: any) => any;
+    updateFloatingLocationPosition: (data: any) => any;
     deleteUserFromSphere: (userId: string) => any;
     deleteSphere: () => Promise<any>;
     _deleteSphere: (cloudSphereId: string) => any;

@@ -1,4 +1,4 @@
-interface user {
+interface user_cloudModule {
     /**
      *
      * @param options
@@ -13,7 +13,6 @@ interface user {
      *   password: string,
      *   onUnverified: callback,
      *   onInvalidCredentials: callback,
-     *   background: boolean
      * }
      *
      * resolves with the parsed data, rejects with {status: httpStatus, data: data}
@@ -29,19 +28,19 @@ interface user {
      *
      * @returns {*}
      */
-    getUserData: (background?: boolean) => Promise<any>;
+    getUserData: () => Promise<any>;
     /**
      *
      * @returns {*}
      */
-    getPendingInvites: (background?: boolean) => Promise<any>;
+    getPendingInvites: () => Promise<any>;
     /**
      *
      * @param data
-     * @param background
+
      * @returns {Promise}
      */
-    updateUserData: (data: any, background?: boolean) => Promise<any>;
+    updateUserData: (data: any) => Promise<any>;
     /**
      *
      * @param options
@@ -52,5 +51,5 @@ interface user {
      * @param options
      */
     requestPasswordResetEmail: (options?: any) => Promise<any>;
-    getKeys: (cloudSphereId?: any, cloudStoneId?: any, background?: boolean) => Promise<any>;
+    getKeys: (cloudSphereId?: any, cloudStoneId?: any) => Promise<any>;
 }

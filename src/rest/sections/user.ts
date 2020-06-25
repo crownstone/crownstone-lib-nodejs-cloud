@@ -1,7 +1,7 @@
 import { cloudApiBase } from "./cloudApiBase";
 
-export const user : user = {
-  /**
+export const user : user_cloudModule = {
+/**
    *
    * @param options
    * @returns {Promise}
@@ -23,7 +23,6 @@ export const user : user = {
    *   password: string,
    *   onUnverified: callback,
    *   onInvalidCredentials: callback,
-   *   background: boolean
    * }
    *
    * resolves with the parsed data, rejects with {status: httpStatus, data: data}
@@ -46,14 +45,13 @@ export const user : user = {
    * @param file {String} --> full path string.
    */
   setEarlyAccess: function(level) {
-    return cloudApiBase._setupRequest('PUT', '/users/{id}', {data: { earlyAccessLevel: level }, background: false}, 'body');
+    return cloudApiBase._setupRequest('PUT', '/users/{id}', {data: { earlyAccessLevel: level }}, 'body');
   },
 
-  removeProfileImage: function(options : any = {}) {
+  removeProfileImage: function() {
     return cloudApiBase._setupRequest(
       'DELETE',
       'users/{id}/profilePic',
-      { background: options.background }
     );
   },
 
@@ -61,26 +59,25 @@ export const user : user = {
    *
    * @returns {*}
    */
-  getUserData: function (background = true) {
-    return cloudApiBase._setupRequest('GET', '/users/{id}', {background});
+  getUserData: function () {
+    return cloudApiBase._setupRequest('GET', '/users/{id}', );
   },
 
   /**
    *
    * @returns {*}
    */
-  getPendingInvites: function (background = true) {
-    return cloudApiBase._setupRequest('GET', '/users/{id}/pendingInvites', {background});
+  getPendingInvites: function () {
+    return cloudApiBase._setupRequest('GET', '/users/{id}/pendingInvites', );
   },
 
   /**
    *
    * @param data
-   * @param background
    * @returns {Promise}
    */
-  updateUserData: function(data, background = true) {
-    return cloudApiBase._setupRequest('PUT', '/users/{id}', {data: data, background: background}, 'body');
+  updateUserData: function(data) {
+    return cloudApiBase._setupRequest('PUT', '/users/{id}', {data: data}, 'body');
   },
 
   /**
@@ -91,7 +88,7 @@ export const user : user = {
     return cloudApiBase._setupRequest(
       'POST',
       'users/resendVerification',
-      { data: { email: options.email }, background: options.background },
+      { data: { email: options.email } },
       'query'
     );
   },
@@ -104,17 +101,17 @@ export const user : user = {
     return cloudApiBase._setupRequest(
       'POST',
       'users/reset',
-      { data: { email: options.email }, background: options.background },
+      { data: { email: options.email } },
       'body'
     );
   },
 
-  getKeys: function(cloudSphereId = undefined, cloudStoneId = undefined, background = true) {
+  getKeys: function(cloudSphereId = undefined, cloudStoneId = undefined) {
 
     return cloudApiBase._setupRequest(
       'GET',
       'users/{id}/keysV2',
-      {data: { sphereId: cloudSphereId, stoneId: cloudStoneId }, background : background},
+      {data: { sphereId: cloudSphereId, stoneId: cloudStoneId }},
       "query"
     );
   },

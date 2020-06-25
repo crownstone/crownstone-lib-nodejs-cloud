@@ -1,6 +1,5 @@
 interface requestOptions {
   data?: any,
-  background?: boolean,
   noAccessToken?: boolean,
 }
 

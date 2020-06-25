@@ -1,33 +1,33 @@
 import { cloudApiBase } from "./cloudApiBase";
 
-export const locations : locations = {
-  getLocations: function (background = true) {
-    return cloudApiBase._setupRequest('GET', '/Spheres/{id}/ownedLocations', {background: background, data:{filter:{"include":["sphereOverviewPosition","presentPeople"]}}});
+export const locations : locations_cloudModule = {
+getLocations: function () {
+    return cloudApiBase._setupRequest('GET', '/Spheres/{id}/ownedLocations', {data:{filter:{"include":["sphereOverviewPosition","presentPeople"]}}});
   },
 
-  createLocation: function (data, background = true) {
+  createLocation: function (data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Spheres/{id}/ownedLocations',
-      {data: data, background: background},
+      {data: data},
       'body'
     );
   },
 
-  updateLocation: function (cloudLocationId, data, background = true) {
+  updateLocation: function (cloudLocationId, data) {
     return cloudApiBase._setupRequest(
       'PUT',
       '/Spheres/{id}/ownedLocations/' + cloudLocationId,
-      {background: background, data: data},
+      {data: data},
       'body'
     );
   },
 
-  updateLocationPosition: function (data, background = true) {
+  updateLocationPosition: function (data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Locations/{id}/sphereOverviewPosition/',
-      {background: background, data: data},
+      {data: data},
       'body'
     );
   },

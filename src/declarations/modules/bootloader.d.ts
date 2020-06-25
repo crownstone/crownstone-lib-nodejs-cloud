@@ -1,4 +1,4 @@
-interface bootloader {
-    getBootloaderDetails: (version: any, hardwareVersion: any, background?: boolean) => Promise<any>;
-    getLatestAvailableBootloader: (background?: boolean) => Promise<any>;
+interface bootloader_cloudModule {
+    getBootloaderDetails: (version: any, hardwareVersion: any) => Promise<any>;
+    getLatestAvailableBootloader: () => Promise<any>;
 }

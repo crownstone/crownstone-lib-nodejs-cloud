@@ -1,18 +1,17 @@
 import { cloudApiBase, TokenStore } from "./cloudApiBase";
 import { REST } from "../cloudAPI";
 
-export const stones : stones = {
-  /**
+export const stones : stones_cloudModule = {
+/**
    * Create a crownstone in the cloud so the major and minor can be generated
    * @param data
-   * @param background
    * @returns {*}
    */
-  createStone: function(data : any, background = true) {
+  createStone: function(data : any) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Spheres/{id}/ownedStones/',
-      {data:data, background: background},
+      {data:data},
       'body'
     );
   },
@@ -22,14 +21,13 @@ export const stones : stones = {
    * Update a crownstone in the cloud
    * @param localStoneId
    * @param data
-   * @param background
    * @returns {*}
    */
-  updateStone: function(cloudStoneId, data, background = true) {
+  updateStone: function(cloudStoneId, data) {
     return cloudApiBase._setupRequest(
       'PUT',
       '/Spheres/{id}/ownedStones/' + cloudStoneId,
-      {background: background, data: data},
+      {data: data},
       'body'
     );
   },
@@ -37,14 +35,13 @@ export const stones : stones = {
   /**
    * Update a crownstone in the cloud
    * @param switchState
-   * @param background
    * @returns {*}
    */
-  updateStoneSwitchState: function(switchState, background = true) {
+  updateStoneSwitchState: function(switchState) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Stones/{id}/currentSwitchState?switchState='  + switchState,
-      {background: background},
+      {},
       'body'
     );
   },
@@ -52,14 +49,13 @@ export const stones : stones = {
   /**
    * Update a current energy usage
    * @param data
-   * @param background
    * @returns {*}
    */
-  updatePowerUsage: function(data, background = true) {
+  updatePowerUsage: function(data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Stones/{id}/currentPowerUsage/',
-      { background: background, data: data },
+      { data: data },
       'body'
     );
   },
@@ -67,14 +63,13 @@ export const stones : stones = {
   /**
    * Update a current energy usage
    * @param data
-   * @param background
    * @returns {*}
    */
-  updateBatchPowerUsage: function(data : any[], background = true) {
+  updateBatchPowerUsage: function(data : any[]) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Stones/{id}/batchPowerUsage/',
-      { background: background, data: data },
+      { data: data },
       'body'
     );
   },
@@ -90,15 +85,14 @@ export const stones : stones = {
    * @param localLocationId
    * @param localSphereId
    * @param updatedAt
-   * @param background
    * @param doNotSetUpdatedTimes
    * @returns {*}
    */
-  updateStoneLocationLink: function(cloudLocationId, localSphereId, updatedAt, background = true, doNotSetUpdatedTimes = false) {
+  updateStoneLocationLink: function(cloudLocationId, localSphereId, updatedAt, doNotSetUpdatedTimes = false) {
     return cloudApiBase._setupRequest(
         'PUT',
         '/Stones/{id}/locations/rel/' + cloudLocationId,
-        {background: background},
+        {},
       )
       .then(() => {
         if (doNotSetUpdatedTimes !== true) {
@@ -122,14 +116,13 @@ export const stones : stones = {
    * @param localLocationId
    * @param localSphereId
    * @param updatedAt
-   * @param background
    * @returns {*}
    */
-  deleteStoneLocationLink: function(cloudLocationId, localSphereId, updatedAt, background = true) {
+  deleteStoneLocationLink: function(cloudLocationId, localSphereId, updatedAt) {
     return cloudApiBase._setupRequest(
         'DELETE',
         '/Stones/{id}/locations/rel/' + cloudLocationId,
-        {background: background},
+        {},
       )
       .then(() => {
         let promises = [];
@@ -147,11 +140,11 @@ export const stones : stones = {
    * request the data of all crownstones in this sphere
    * @returns {*}
    */
-  getStonesInSphere: function(background = true) {
+  getStonesInSphere: function() {
     return cloudApiBase._setupRequest(
       'GET',
       '/Spheres/{id}/ownedStones',
-      {background: background, data: {filter:{"include":["locations", {"abilities":"properties"}, "behaviours"]}}}
+      {data: {filter:{"include":["locations", {"abilities":"properties"}, "behaviours"]}}}
     );
   },
 
@@ -199,11 +192,11 @@ export const stones : stones = {
 
 
 
-  sendStoneDiagnosticInfo: function(data, background = true) {
+  sendStoneDiagnosticInfo: function(data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Stones/{id}/diagnostics',
-      { background: background, data: data },
+      { data: data },
       'body'
     );
   }

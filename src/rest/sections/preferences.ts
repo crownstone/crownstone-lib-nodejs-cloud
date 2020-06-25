@@ -3,40 +3,39 @@
  */
 import { cloudApiBase } from "./cloudApiBase";
 
-export const preferences : preferences = {
-
-  getPreferences: function (background = true) {
+export const preferences : preferences_cloudModule = {
+getPreferences: function () {
     return cloudApiBase._setupRequest(
       'GET',
       '/Devices/{id}/preferences',
-      {background: background},
+      {},
       'query'
     );
   },
 
-  createPreference: function (data, background = true) {
+  createPreference: function (data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Devices/{id}/preferences',
-      {data: data, background: background},
+      {data: data},
       'body'
     );
   },
 
-  updatePreference: function (preferenceCloudId, data, background = true) {
+  updatePreference: function (preferenceCloudId, data) {
     return cloudApiBase._setupRequest(
       'PUT',
       '/Devices/{id}/preferences/' + preferenceCloudId,
-      {data: data, background: background},
+      {data: data},
       'body'
     );
   },
 
-  deletePreference: function (preferenceCloudId, background = true) {
+  deletePreference: function (preferenceCloudId) {
     return cloudApiBase._setupRequest(
       'DELETE',
       '/Devices/{id}/preferences/' + preferenceCloudId,
-      { background: background },
+      {},
       'body'
     );
   },

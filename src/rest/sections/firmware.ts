@@ -1,12 +1,12 @@
 import { cloudApiBase } from "./cloudApiBase";
 
 
-export const firmware : firmware = {
-  getFirmwareDetails: function (version, hardwareVersion, background = true) {
-    return cloudApiBase._setupRequest('GET', '/Firmwares?version=' + version + '&hardwareVersion=' + hardwareVersion, {background:background});
+export const firmware : firmware_cloudModule = {
+getFirmwareDetails: function (version, hardwareVersion) {
+    return cloudApiBase._setupRequest('GET', '/Firmwares?version=' + version + '&hardwareVersion=' + hardwareVersion);
   },
 
-  getLatestAvailableFirmware: function (background = true) {
-    return cloudApiBase._setupRequest('GET', '/Firmwares/latest', {background: background});
+  getLatestAvailableFirmware: function () {
+    return cloudApiBase._setupRequest('GET', '/Firmwares/latest');
   },
 };

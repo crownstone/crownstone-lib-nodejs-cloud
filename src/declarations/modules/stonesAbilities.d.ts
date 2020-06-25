@@ -1,4 +1,4 @@
-interface stonesAbilities {
-    getStoneAbilities: (background?: boolean) => Promise<any>;
-    setStoneAbilities: (data: any, background?: boolean) => Promise<any>;
+interface stonesAbilities_cloudModule {
+    getStoneAbilities: () => Promise<any>;
+    setStoneAbilities: (data: any) => Promise<any>;
 }

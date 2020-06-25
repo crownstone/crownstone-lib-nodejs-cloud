@@ -1,40 +1,40 @@
-interface stones {
+interface stones_cloudModule {
     /**
      * Create a crownstone in the cloud so the major and minor can be generated
      * @param data
-     * @param background
+
      * @returns {*}
      */
-    createStone: (data: any, background?: boolean) => Promise<any>;
+    createStone: (data: any) => Promise<any>;
     /**
      * Update a crownstone in the cloud
      * @param localStoneId
      * @param data
-     * @param background
+
      * @returns {*}
      */
-    updateStone: (cloudStoneId: string, data: any, background?: boolean) => Promise<any>;
+    updateStone: (cloudStoneId: string, data: any) => Promise<any>;
     /**
      * Update a crownstone in the cloud
      * @param switchState
-     * @param background
+
      * @returns {*}
      */
-    updateStoneSwitchState: (switchState: any, background?: boolean) => Promise<any>;
+    updateStoneSwitchState: (switchState: any) => Promise<any>;
     /**
      * Update a current energy usage
      * @param data
-     * @param background
+
      * @returns {*}
      */
-    updatePowerUsage: (data: any, background?: boolean) => Promise<any>;
+    updatePowerUsage: (data: any) => Promise<any>;
     /**
      * Update a current energy usage
      * @param data
-     * @param background
+
      * @returns {*}
      */
-    updateBatchPowerUsage: (data: any[], background?: boolean) => Promise<any>;
+    updateBatchPowerUsage: (data: any[]) => Promise<any>;
     /**
      * !
      * !
@@ -45,11 +45,11 @@ interface stones {
      * @param localLocationId
      * @param localSphereId
      * @param updatedAt
-     * @param background
+
      * @param doNotSetUpdatedTimes
      * @returns {*}
      */
-    updateStoneLocationLink: (cloudLocationId: string, localSphereId: string, updatedAt: any, background?: boolean, doNotSetUpdatedTimes?: boolean) => Promise<any[]>;
+    updateStoneLocationLink: (cloudLocationId: string, localSphereId: string, updatedAt: any, doNotSetUpdatedTimes?: boolean) => Promise<any[]>;
     /**
      * !
      * !
@@ -60,15 +60,15 @@ interface stones {
      * @param localLocationId
      * @param localSphereId
      * @param updatedAt
-     * @param background
+
      * @returns {*}
      */
-    deleteStoneLocationLink: (cloudLocationId: string, localSphereId: string, updatedAt: any, background?: boolean) => Promise<any[]>;
+    deleteStoneLocationLink: (cloudLocationId: string, localSphereId: string, updatedAt: any) => Promise<any[]>;
     /**
      * request the data of all crownstones in this sphere
      * @returns {*}
      */
-    getStonesInSphere: (background?: boolean) => Promise<any>;
+    getStonesInSphere: () => Promise<any>;
     /**
      * request the data from this crownstone in the cloud
      * @param localStoneId  database id of crownstone
@@ -87,5 +87,5 @@ interface stones {
      * @returns {*}
      */
     deleteStone: (cloudStoneId: string) => Promise<any>;
-    sendStoneDiagnosticInfo: (data: any, background?: boolean) => Promise<any>;
+    sendStoneDiagnosticInfo: (data: any) => Promise<any>;
 }

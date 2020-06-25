@@ -1,6 +1,6 @@
-interface preferences {
-    getPreferences: (background?: boolean) => Promise<any>;
-    createPreference: (data: any, background?: boolean) => Promise<any>;
-    updatePreference: (preferenceCloudId: string, data: any, background?: boolean) => Promise<any>;
-    deletePreference: (preferenceCloudId: string, background?: boolean) => Promise<any>;
+interface preferences_cloudModule {
+    getPreferences: () => Promise<any>;
+    createPreference: (data: any) => Promise<any>;
+    updatePreference: (preferenceCloudId: string, data: any) => Promise<any>;
+    deletePreference: (preferenceCloudId: string) => Promise<any>;
 }

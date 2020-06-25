@@ -1,24 +1,24 @@
 import { cloudApiBase } from "./cloudApiBase";
 
-export const devices : devices = {
-  getDevices: function (background: true) {
-    return cloudApiBase._setupRequest('GET', '/users/{id}/devices', {background:background, data:{filter:{"include":"installations"}}});
+export const devices : devices_cloudModule = {
+getDevices: function () {
+    return cloudApiBase._setupRequest('GET', '/users/{id}/devices', {data:{filter:{"include":"installations"}}});
   },
 
-  createDevice: function (data, background = true) {
+  createDevice: function (data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/users/{id}/devices',
-      { data: data, background: background},
+      { data: data},
       'body'
     );
   },
 
-  updateDevice: function (deviceId, data, background = true) {
+  updateDevice: function (deviceId, data) {
     return cloudApiBase._setupRequest(
       'PUT',
       '/Devices/' + deviceId,
-      { data: data, background: background },
+      { data: data },
       'body'
     );
   },
@@ -44,47 +44,47 @@ export const devices : devices = {
     );
   },
 
-  getTrackingNumberInSphere: function(cloudSphereId, background = true) {
+  getTrackingNumberInSphere: function(cloudSphereId) {
     return cloudApiBase._setupRequest(
       'GET',
       '/Devices/{id}/trackingNumber/',
-      { data: {sphereId:cloudSphereId}, background: background },
+      { data: {sphereId:cloudSphereId} },
       'query'
     );
   },
 
-  inSphere: function (cloudSphereId, background = true) {
+  inSphere: function (cloudSphereId) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Devices/{id}/inSphere/',
-      { data: {sphereId:cloudSphereId}, background: background },
+      { data: {sphereId:cloudSphereId} },
       'query'
     );
   },
 
-  inLocation: function (cloudSphereId, cloudLocationId, background = true) {
+  inLocation: function (cloudSphereId, cloudLocationId) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Devices/{id}/inLocation/',
-      { data: {sphereId:cloudSphereId, locationId:cloudLocationId }, background: background },
+      { data: {sphereId:cloudSphereId, locationId:cloudLocationId } },
       'query'
     );
   },
 
-  exitLocation: function (cloudSphereId, cloudLocationId, background = true) {
+  exitLocation: function (cloudSphereId, cloudLocationId) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Devices/{id}/exitLocation/',
-      { data: {sphereId:cloudSphereId, locationId:cloudLocationId }, background: background },
+      { data: {sphereId:cloudSphereId, locationId:cloudLocationId } },
       'query'
     );
   },
 
-  exitSphere: function (cloudSphereId, background = true) {
+  exitSphere: function (cloudSphereId) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Devices/{id}/exitSphere/',
-      { data: {sphereId:cloudSphereId}, background: background },
+      { data: {sphereId:cloudSphereId} },
       'query'
     );
   },

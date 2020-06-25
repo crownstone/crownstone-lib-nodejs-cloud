@@ -1,21 +1,20 @@
 import { cloudApiBase } from "./cloudApiBase";
 
-export const stonesAbilities : stonesAbilities = {
-
-  getStoneAbilities: function(background = true) {
+export const stonesAbilities : stonesAbilities_cloudModule = {
+getStoneAbilities: function() {
     return cloudApiBase._setupRequest(
       'GET',
       '/Stones/{id}/abilities/',
-      {background: background},
+      {},
       'body'
     );
   },
 
-  setStoneAbilities: function(data: any, background = true) {
+  setStoneAbilities: function(data: any) {
     return cloudApiBase._setupRequest(
       'PUT',
       '/Stones/{id}/abilities/',
-      {data: data, background: background},
+      {data: data},
       'body'
     );
   },

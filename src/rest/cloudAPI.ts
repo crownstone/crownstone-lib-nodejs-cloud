@@ -42,17 +42,32 @@ function combineSections() {
   return result;
 }
 
-interface REST_api extends cloudApiBase, bootloader, devices,firmware,fingerprints,installations,locations,hub,messages,preferences,spheres,stones,stonesAbilities,stonesBehaviours,user {
-  setAccessToken:  (token: string) => REST_api,
-  setUserId:       (token: string) => REST_api,
-  forUser:         (token: string) => REST_api,
-  forDevice:       (token: string) => REST_api,
-  forInstallation: (token: string) => REST_api,
-  forStone:        (token: string) => REST_api,
-  forSphere:       (token: string) => REST_api,
-  forLocation:     (token: string) => REST_api,
-  forMessage:      (token: string) => REST_api,
-  forHub:          (token: string) => REST_api,
+interface REST_api extends
+  cloudApiBase_cloudModule,
+  bootloader_cloudModule,
+  devices_cloudModule,
+  firmware_cloudModule,
+  fingerprints_cloudModule,
+  installations_cloudModule,
+  locations_cloudModule,
+  hub_cloudModule,
+  messages_cloudModule,
+  preferences_cloudModule,
+  spheres_cloudModule,
+  stones_cloudModule,
+  stonesAbilities_cloudModule,
+  stonesBehaviours_cloudModule,
+  user_cloudModule {
+  setAccessToken:  (token: string)       => this,
+  setUserId:       (userId: string)      => this,
+  forUser:         (userId: string)      => this,
+  forDevice:       (deviceId: string)    => this,
+  forInstallation: (installationId: string) => this,
+  forStone:        (stoneId: string)     => this,
+  forSphere:       (sphereId: string)    => this,
+  forLocation:     (locationId: string)  => this,
+  forMessage:      (messageId: string)   => this,
+  forHub:          (hubId: string)       => this,
 }
 
 

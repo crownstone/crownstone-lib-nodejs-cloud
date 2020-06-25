@@ -2,12 +2,12 @@ import {request} from '../cloudCore'
 const LOG = require('debug-level')('cloud-api-base')
 
 export const defaultHeaders = {
-  'Accept': 'application/json',
+'Accept': 'application/json',
   'Content-Type': 'application/json'
 };
 
 export const uploadHeaders = {
-  'Accept': 'application/json',
+'Accept': 'application/json',
   'Content-Type': 'multipart/form-data',
 };
 
@@ -15,9 +15,7 @@ export const uploadHeaders = {
 
 interface requestOptions {
   data?: any,
-  background?: boolean,
   noAccessToken?: boolean,
-
 }
 
 type requestType = 'query' | 'body';
@@ -44,8 +42,8 @@ export const TokenStore = new TokenStoreClass();
  * The cloud API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
  * When the responses come back successfully, the convenience wrappers allow callbacks for relevant scenarios.
  */
-export const cloudApiBase : cloudApiBase = {
-  _networkErrorHandler: (err) => {},
+export const cloudApiBase : cloudApiBase_cloudModule = {
+_networkErrorHandler: (err) => {},
 
   _post: function(options) {
     return request(options, 'POST',   defaultHeaders, _getId(options.endPoint, TokenStore), TokenStore.accessToken);
@@ -92,19 +90,9 @@ export const cloudApiBase : cloudApiBase = {
   // },
   _handleNetworkError: function (error, options, endpoint, promiseBody, reject, startTime) {
     // this will eliminate all cloud requests.
-    if (options.background !== true) {
-      // make sure we do not show this popup when too much time has passed.
-      // this can happen when the app starts to sleep and wakes up much later, resulting in the user encountering an error message on app open.
-      if (new Date().valueOf()  - startTime < 20000) {
-        this._networkErrorHandler(error);
-      }
 
-      reject(error);
-    }
-    else {
-      // still reject the promise even if it is a background operation.
-      reject(error);
-    }
+    this._networkErrorHandler(error);
+    reject(error);
   },
 
   /**
@@ -153,7 +141,7 @@ export const cloudApiBase : cloudApiBase = {
             this.__debugReject(reply, reject, [promise, options, endpoint, promiseBody]);
         })
         .catch((error) => {
-          //console.trace(error, this);
+          console.trace(error);
           this._handleNetworkError(error, options, endpoint, promiseBody, reject, startTime);
         })
     });

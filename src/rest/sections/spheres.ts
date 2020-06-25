@@ -4,15 +4,12 @@ import { stones } from "./stones";
 import { locations } from "./locations";
 import { REST } from "../cloudAPI";
 
-export const spheres : spheres = {
-
-
-
-  updateSphere: function(cloudSphereId, data, background = true) {
+export const spheres : spheres_cloudModule = {
+updateSphere: function(cloudSphereId, data) {
     return REST._setupRequest(
       'PUT',
       '/Spheres/' + cloudSphereId,
-      {background: background, data: data},
+      {data: data},
       'body'
     );
   },
@@ -33,16 +30,16 @@ export const spheres : spheres = {
     }
   },
 
-  getPendingSphereInvites: function(background = true) {
-    return REST._setupRequest('GET', '/Spheres/{id}/pendingInvites', {background:background});
+  getPendingSphereInvites: function() {
+    return REST._setupRequest('GET', '/Spheres/{id}/pendingInvites');
   },
 
-  resendInvite: function(email, background = false) {
-    return REST._setupRequest('GET', '/Spheres/{id}/resendInvite', {data:{email: email}, background: background});
+  resendInvite: function(email) {
+    return REST._setupRequest('GET', '/Spheres/{id}/resendInvite', {data:{email: email}});
   },
 
-  revokeInvite: function(email, background = false) {
-    return REST._setupRequest('GET', '/Spheres/{id}/removeInvite', {data:{email: email}, background: background});
+  revokeInvite: function(email) {
+    return REST._setupRequest('GET', '/Spheres/{id}/removeInvite', {data:{email: email}});
   },
 
 
@@ -51,59 +48,57 @@ export const spheres : spheres = {
    *
    * @returns {*}
    */
-  getSpheres: function (background = true) {
-    return REST._setupRequest('GET', '/users/{id}/spheres', { data: {filter: {include:"floatingLocationPosition"}}, background: background });
+  getSpheres: function () {
+    return REST._setupRequest('GET', '/users/{id}/spheres', { data: {filter: {include:"floatingLocationPosition"}} });
   },
 
-  getUsers: function (background = true) {
-    return REST._setupRequest('GET', '/Spheres/{id}/users', { background : background } );
+  getUsers: function () {
+    return REST._setupRequest('GET', '/Spheres/{id}/users',  );
   },
 
-  getAdmins: function (background = true) {
-    return REST._setupRequest('GET', '/Spheres/{id}/admins', { background : background });
+  getAdmins: function () {
+    return REST._setupRequest('GET', '/Spheres/{id}/admins', );
   },
 
-  getMembers: function (background = true) {
-    return REST._setupRequest('GET', '/Spheres/{id}/members', { background : background });
+  getMembers: function () {
+    return REST._setupRequest('GET', '/Spheres/{id}/members', );
   },
 
-  getGuests: function (background = true) {
-    return REST._setupRequest('GET', '/Spheres/{id}/guests', { background : background });
+  getGuests: function () {
+    return REST._setupRequest('GET', '/Spheres/{id}/guests', );
   },
 
-  getToons: function (background = true) {
-    return REST._setupRequest('GET', '/Spheres/{id}/Toons', { background : background });
+  getToons: function () {
+    return REST._setupRequest('GET', '/Spheres/{id}/Toons', );
   },
 
-  getPresentPeople: function (ignoreDeviceId, background = true) {
+  getPresentPeople: function (ignoreDeviceId) {
     return REST._setupRequest('GET', '/Spheres/{id}/PresentPeople', {
       data: { ignoreDeviceId: ignoreDeviceId },
-      background : background
     }, 'query');
   },
 
 
   /**
    * @param data
-   * @param background
    */
-  createSphere: function(data, background = true) {
-    return REST._setupRequest('POST', 'users/{id}/spheres', { data: data, background: background }, 'body');
+  createSphere: function(data) {
+    return REST._setupRequest('POST', 'users/{id}/spheres', { data: data }, 'body');
   },
 
   changeSphereName: function(sphereName) {
     return REST._setupRequest('PUT', '/Spheres/{id}', { data: { name: sphereName }}, 'body');
   },
 
-  changeUserAccess: function(email, accessLevel, background = false) {
-    return REST._setupRequest('PUT', '/Spheres/{id}/role', {data: {email: email, role:accessLevel}, background:background}, 'query');
+  changeUserAccess: function(email, accessLevel) {
+    return REST._setupRequest('PUT', '/Spheres/{id}/role', {data: {email: email, role:accessLevel} }, 'query');
   },
 
-  updateFloatingLocationPosition: function (data, background = true) {
+  updateFloatingLocationPosition: function (data) {
     return REST._setupRequest(
       'POST',
       '/Spheres/{id}/floatingLocationPosition/',
-      {background: background, data: data},
+      {data: data},
       'body'
     );
   },
@@ -177,7 +172,7 @@ export const spheres : spheres = {
     return REST._setupRequest(
       'POST',
       '/Spheres/{id}/inviteAccept/',
-      {background: false},
+      {},
       'body'
       );
   },
@@ -186,7 +181,7 @@ export const spheres : spheres = {
     return REST._setupRequest(
       'POST',
       '/Spheres/{id}/inviteDecline/',
-      {background: false},
+      {},
       'body'
       );
   },

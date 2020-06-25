@@ -1,97 +1,90 @@
 import { cloudApiBase } from "./cloudApiBase";
 
-export const messages : messages = {
-
-  createMessage: function (data, background) {
+export const messages : messages_cloudModule = {
+createMessage: function (data) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Spheres/{id}/messages',
-      { data: data, background: background },
+      { data: data },
       'body'
     );
   },
 
-  receivedMessage: function (cloudMessageId, background) {
+  receivedMessage: function (cloudMessageId) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Messages/' + cloudMessageId + '/delivered',
-      { background: background },
+      {},
       'body'
     );
   },
 
-  readMessage: function (cloudMessageId, background) {
+  readMessage: function (cloudMessageId) {
     return cloudApiBase._setupRequest(
       'POST',
       '/Messages/' + cloudMessageId + '/read',
-      { background: background },
+      {},
       'body'
     );
   },
 
 
-  getMessage: function (cloudMessageId, background = true) {
+  getMessage: function (cloudMessageId) {
     return cloudApiBase._setupRequest(
       'GET',
       '/Messages/' + cloudMessageId,
-      { data: {filter:{"include":["recipients","delivered","read"]}}, background: background }
+      { data: {filter:{"include":["recipients","delivered","read"]}} }
     );
   },
 
-  getNewMessagesInSphere: function (background = true) {
+  getNewMessagesInSphere: function () {
     return cloudApiBase._setupRequest(
       'GET',
       '/Spheres/{id}/myNewMessages',
-      { background: background }
     );
   },
 
-  getAllMessagesInSphere: function (background = true) {
+  getAllMessagesInSphere: function () {
     return cloudApiBase._setupRequest(
       'GET',
       '/Spheres/{id}/myMessages',
-      { background: background }
     );
   },
 
-  getNewMessagesInLocation: function (cloudLocationId, background = true) {
+  getNewMessagesInLocation: function (cloudLocationId) {
     return cloudApiBase._setupRequest(
       'GET',
       '/Spheres/{id}/myNewMessagesInLocation/' + cloudLocationId,
-      { background: background }
     );
   },
 
-  getActiveMessages: function(background = true) {
+  getActiveMessages: function() {
     return cloudApiBase._setupRequest(
       'GET',
       '/Spheres/{id}/myActiveMessages/',
-      { background : background }
+
     );
   },
 
-  addRecipient: function(recipientId, background = true) {
+  addRecipient: function(recipientId) {
     // recipientId is a userId, these are the same in the cloud as locally.
     return cloudApiBase._setupRequest(
       'PUT',
       '/Messages/{id}/recipients/rel/' + recipientId,
-      { background: background }
     );
   },
 
-  deleteMessage: function (cloudMessageId, background = true) {
+  deleteMessage: function (cloudMessageId) {
     return cloudApiBase._setupRequest(
       'DELETE',
       '/Spheres/{id}/messages/' + cloudMessageId,
-      { background: background }
     );
   },
 
-  deleteAllMessages: function (background = true) {
+  deleteAllMessages: function () {
     return cloudApiBase._setupRequest(
       'DELETE',
       '/Spheres/{id}/deleteAllMessages',
-      { background: background }
     );
   },
 };

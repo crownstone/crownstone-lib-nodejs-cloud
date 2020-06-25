@@ -29,7 +29,6 @@ export class CrownstoneCloud {
       password: hashedPassword,
       onUnverified: () => { throw "User is unverified."},
       onInvalidCredentials: () => { throw "Invalid username/password."},
-      background: false
     })
     this.accessToken = loginResult.id;
     this.accessTokenExpiration = new Date(new Date().valueOf() + loginResult.ttl*1000);

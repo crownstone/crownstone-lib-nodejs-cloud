@@ -8,14 +8,13 @@ interface uploadHeaders {
 }
 interface requestOptions {
     data?: any;
-    background?: boolean;
     noAccessToken?: boolean;
 }
 /**
  * The cloud API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
  * When the responses come back successfully, the convenience wrappers allow callbacks for relevant scenarios.
  */
-interface cloudApiBase {
+interface cloudApiBase_cloudModule {
     _networkErrorHandler: (err: any) => void;
     _post: (options: any) => Promise<any>;
     _get: (options: any) => Promise<any>;

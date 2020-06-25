@@ -1,9 +1,9 @@
-interface fingerprints {
-    createFingerprint: (cloudLocationId: string, data: any, background: true) => Promise<any>;
-    getFingerprintsInLocations: (cloudLocationIdArray: any, background?: boolean) => Promise<any>;
-    getFingerprints: (fingerprintIdArray: any, background?: boolean) => Promise<any>;
-    updateFingerprint: (fingerprintId: string, data: any, background?: boolean) => Promise<any>;
-    getMatchingFingerprintsInLocations: (cloudLocationIdArray: any, background?: boolean) => Promise<any>;
-    linkFingerprints: (fingerprintIdArray: any, background?: boolean) => Promise<any>;
-    getFingerprintUpdateTimes: (fingerprintIdArray: any, background?: boolean) => Promise<any>;
+interface fingerprints_cloudModule {
+    createFingerprint: (cloudLocationId: string, data: any) => Promise<any>;
+    getFingerprintsInLocations: (cloudLocationIdArray: any) => Promise<any>;
+    getFingerprints: (fingerprintIdArray: any) => Promise<any>;
+    updateFingerprint: (fingerprintId: string, data: any) => Promise<any>;
+    getMatchingFingerprintsInLocations: (cloudLocationIdArray: any) => Promise<any>;
+    linkFingerprints: (fingerprintIdArray: any) => Promise<any>;
+    getFingerprintUpdateTimes: (fingerprintIdArray: any) => Promise<any>;
 }
