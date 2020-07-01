@@ -72,7 +72,7 @@ export function request(
     url = CLOUD_ADDRESS + endPoint;
   }
 
-  LOG.debug(method,"requesting from URL:", url, "config:", requestConfig, logToken);
+  LOG.info(method,"requesting from URL:", url, "config:", requestConfig, logToken);
 
   // the actual request
   return new Promise((resolve, reject) => {
@@ -105,6 +105,9 @@ export function request(
       })
       .then((parsedResponse) => {
         if (stopRequest === false) {
+          if (STATUS >= 400) { LOG.warn("REPLY from", endPoint, " failed", STATUS, logToken); }
+          else               { LOG.info("REPLY from", endPoint, " SUCCESSFUL", STATUS, logToken); }
+
           LOG.debug("REPLY from", endPoint, " with options: ", requestConfig, " is: ", {status: STATUS, data: parsedResponse}, logToken);
           finishedRequest = true;
           resolve({status: STATUS, data: parsedResponse});
