@@ -161,6 +161,13 @@ export const stones : stones_cloudModule = {
     );
   },
 
+  getAllStoneData: function() {
+    return cloudApiBase._setupRequest(
+      'GET',
+      '/Stones/all',
+      {data: {filter:{"include":["locations", {"abilities":"properties"}, "behaviours"]}}}
+    );
+  },
 
   /**
    * search for crownstone with this mac address

@@ -67,6 +67,14 @@ export const user : user_cloudModule = {
    *
    * @returns {*}
    */
+  getUserId: function () {
+    return cloudApiBase._setupRequest('GET', '/users/userId' );
+  },
+
+  /**
+   *
+   * @returns {*}
+   */
   getPendingInvites: function () {
     return cloudApiBase._setupRequest('GET', '/users/{id}/pendingInvites', );
   },

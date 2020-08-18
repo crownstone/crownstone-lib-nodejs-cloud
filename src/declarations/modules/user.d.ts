@@ -29,6 +29,7 @@ interface user_cloudModule {
      * @returns {*}
      */
     getUserData: () => Promise<any>;
+    getUserId:   () => Promise<string>;
     /**
      *
      * @returns {*}

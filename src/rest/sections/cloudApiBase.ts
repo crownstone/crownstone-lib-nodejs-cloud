@@ -43,7 +43,7 @@ export const TokenStore = new TokenStoreClass();
  * When the responses come back successfully, the convenience wrappers allow callbacks for relevant scenarios.
  */
 export const cloudApiBase : cloudApiBase_cloudModule = {
-_networkErrorHandler: (err) => {},
+  _networkErrorHandler: (err) => {},
 
   _post: function(options) {
     return request(options, 'POST',   defaultHeaders, _getId(options.endPoint, TokenStore), TokenStore.accessToken);

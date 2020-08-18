@@ -88,4 +88,6 @@ interface stones_cloudModule {
      */
     deleteStone: (cloudStoneId: string) => Promise<any>;
     sendStoneDiagnosticInfo: (data: any) => Promise<any>;
+
+    getAllStoneData: () => Promise<any>
 }
