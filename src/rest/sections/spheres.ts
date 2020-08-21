@@ -104,7 +104,7 @@ updateSphere: function(cloudSphereId, data) {
   },
 
   deleteUserFromSphere: function(userId) {
-    // userId is the same in the cloud as it is locally
+    // userId is the same in the rest as it is locally
     return REST._setupRequest('DELETE', '/Spheres/{id}/users/rel/' + userId);
   },
 

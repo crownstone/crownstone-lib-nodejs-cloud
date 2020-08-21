@@ -1,6 +1,22 @@
 
 export const Util = {
 
+  applyMixins: function(derivedConstructor: any, baseConstructors: any[]) {
+    baseConstructors.forEach(baseConstructor => {
+      Object.getOwnPropertyNames(baseConstructor.prototype)
+        .forEach(name => {
+          Object.defineProperty(derivedConstructor.prototype,
+            name,
+            Object.
+            getOwnPropertyDescriptor(
+              baseConstructor.prototype,
+              name
+            )
+          );
+        });
+    });
+  },
+
   pad: function(str) {
     if (Number(str) < 10) {
       return '0' + str;

@@ -10,16 +10,17 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "node-fetch": "^2.6.0",
-    "sha-1": "~0.1.1",
-    "debug-level": "^0.3.1",
+    "cross-fetch": "^3.0.4",
     "crownstone-core": "^0.4.0",
-    "cross-fetch": "^3.0.4"
+    "debug-level": "^0.3.1",
+    "got": "^11.5.2",
+    "node-fetch": "^2.6.0",
+    "sha-1": "~0.1.1"
   },
   "devDependencies": {
-    "jest": "^25.1.0",
     "@types/jest": "^25.1.1",
     "@types/node": "^13.5.3",
+    "jest": "^25.1.0",
     "typescript": "3.7.5"
   },
   "jest": {

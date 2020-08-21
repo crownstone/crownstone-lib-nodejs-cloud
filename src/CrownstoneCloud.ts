@@ -1,58 +1,103 @@
-import {REST} from "./rest/cloudAPI";
+import {Toolchain} from "./tools/toolchain";
+import {CloudRequestorInterface} from "./tools/requestors";
+import {Spheres} from "./dataContainers/Spheres";
+import {Locations} from "./dataContainers/locations";
+import {Crownstones} from "./dataContainers/crownstones";
 const crypto = require('crypto');
 const shasum = crypto.createHash('sha1');
 
-export let CLOUD_ADDRESS = "https://cloud.crownstone.rocks/api/";
+interface UserLoginData { accessToken: string, ttl: number, userId: string }
+interface HubLoginData  { accessToken: string, ttl: number }
+
 export class CrownstoneCloud {
 
-  email: string = null
-  passwordSha1: string = null;
-  accessToken : string = null;
-  accessTokenExpiration : Date = null;
-
-  hubId : string = null;
-  hubToken : string = null;
+  toolchain : Toolchain;
+  rest: CloudRequestorInterface;
 
   constructor(customEndpoint?:string) {
-    if (customEndpoint) { CLOUD_ADDRESS = customEndpoint; }
+    this.toolchain = new Toolchain();
+    this.rest = this.toolchain.getCloudRequestor(customEndpoint);
   }
 
-  async login(email: string, password: string) {
-    shasum.update(password);
+  async login(email: string, password: string) : Promise<UserLoginData> {
+    shasum.update(String(password));
     let hashedPassword = shasum.digest('hex');
     return await this.loginHashed(email, hashedPassword)
   }
 
-  async loginHashed(email: string, hashedPassword: string) {
-    let loginResult = await REST.login({
-      email: email,
-      password: hashedPassword,
-      onUnverified: () => { throw "User is unverified."},
-      onInvalidCredentials: () => { throw "Invalid username/password."},
-    })
-    this.accessToken = loginResult.id;
-    this.accessTokenExpiration = new Date(new Date().valueOf() + loginResult.ttl*1000);
+  async loginHashed(email: string, hashedPassword: string) : Promise<UserLoginData>  {
+    this.toolchain.loadUserData(email, hashedPassword);
+    let result = await this.rest.login();
+
+    this.toolchain.loadAccessToken(result.id, result.userId);
+    return {accessToken: result.id, ttl: result.ttl, userId: result.userId};
   }
 
-  _hubLogin() {
-    return REST.hubLogin(this.hubId, this.hubToken)
-      .then((result) => {
-        this.accessToken = result.id;
-        this.accessTokenExpiration = new Date(new Date().valueOf() + result.ttl*1000);
-      })
-      .catch((err) => {
-        throw err;
-      })
-  }
+  async hubLogin(hubId: string, hubToken: string) : Promise<HubLoginData> {
+    this.toolchain.loadHubData(hubId, hubToken);
+    let result = await this.rest.hubLogin();
 
-  async hubLogin(hubId: string, hubToken: string) {
-    this.hubToken = hubToken;
-    this.hubId = hubId;
-    return this._hubLogin()
-
+    this.toolchain.loadAccessToken(result.id);
+    return {accessToken: result.id, ttl: result.ttl};
   }
 
   setAccessToken(accessToken: string) {
-    this.accessToken = accessToken;
+    this.toolchain.loadAccessToken(accessToken);
   }
+
+  spheres(filter : filter) : Spheres {
+    return new Spheres(this.rest, filter)
+  }
+
+  locations(filter: filter) : Locations {
+    return new Locations(this.rest, null, filter);
+  }
+
+  crownstones(filter: filter) : Crownstones {
+    return new Crownstones(this.rest, null, null, filter);
+  }
+
+  async keys() : Promise<cloud_Keys> {
+    if (this.toolchain.cache.keys !== null) {
+      return this.toolchain.cache.keys;
+    }
+    else {
+      return this.rest.getKeys()
+    }
+  }
+
+  async me() : Promise<cloud_User> {
+    if (this.toolchain.cache.user !== null) {
+      return this.toolchain.cache.user;
+    }
+    else {
+      return this.rest.getUserData()
+    }
+  }
+
 }
+
+/**
+ spheres
+ - crownstones
+ - locations
+ - users
+A - keys()
+A - data()
+
+
+ crownstones
+A - data
+A - turnOn
+A - turnOff
+A - switch(number)
+A - canDim()
+A - isLocked()
+
+ locations
+ A - data
+
+ users
+ A - data
+
+ */

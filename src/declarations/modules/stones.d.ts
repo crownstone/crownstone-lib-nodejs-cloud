@@ -1,13 +1,13 @@
 interface stones_cloudModule {
     /**
-     * Create a crownstone in the cloud so the major and minor can be generated
+     * Create a crownstone in the rest so the major and minor can be generated
      * @param data
 
      * @returns {*}
      */
     createStone: (data: any) => Promise<any>;
     /**
-     * Update a crownstone in the cloud
+     * Update a crownstone in the rest
      * @param localStoneId
      * @param data
 
@@ -15,7 +15,7 @@ interface stones_cloudModule {
      */
     updateStone: (cloudStoneId: string, data: any) => Promise<any>;
     /**
-     * Update a crownstone in the cloud
+     * Update a crownstone in the rest
      * @param switchState
 
      * @returns {*}
@@ -70,7 +70,7 @@ interface stones_cloudModule {
      */
     getStonesInSphere: () => Promise<any>;
     /**
-     * request the data from this crownstone in the cloud
+     * request the data from this crownstone in the rest
      * @param localStoneId  database id of crownstone
      * @returns {*}
      */
@@ -82,7 +82,7 @@ interface stones_cloudModule {
      */
     findStone: (address: any) => Promise<any>;
     /**
-     * Delete the data from this crownstone in the cloud in case of a failed setup or factory reset.
+     * Delete the data from this crownstone in the rest in case of a failed setup or factory reset.
      * stoneId  database id of crownstone
      * @returns {*}
      */

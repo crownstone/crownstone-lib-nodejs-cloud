@@ -3,7 +3,7 @@ import { REST } from "../cloudAPI";
 
 export const stones : stones_cloudModule = {
 /**
-   * Create a crownstone in the cloud so the major and minor can be generated
+   * Create a crownstone in the rest so the major and minor can be generated
    * @param data
    * @returns {*}
    */
@@ -18,7 +18,7 @@ export const stones : stones_cloudModule = {
 
 
   /**
-   * Update a crownstone in the cloud
+   * Update a crownstone in the rest
    * @param localStoneId
    * @param data
    * @returns {*}
@@ -33,7 +33,7 @@ export const stones : stones_cloudModule = {
   },
 
   /**
-   * Update a crownstone in the cloud
+   * Update a crownstone in the rest
    * @param switchState
    * @returns {*}
    */
@@ -99,7 +99,7 @@ export const stones : stones_cloudModule = {
           let promises = [];
           promises.push(REST.forSphere(localSphereId).updateStone(TokenStore.stoneId,{locationId: cloudLocationId, updatedAt: updatedAt}));
           promises.push(REST.forSphere(localSphereId).updateLocation(cloudLocationId,   {updatedAt: updatedAt}));
-          // we set the updatedAt time in the cloud since changing the links does not update the time there
+          // we set the updatedAt time in the rest since changing the links does not update the time there
           return Promise.all(promises);
         }
       })
@@ -128,7 +128,7 @@ export const stones : stones_cloudModule = {
         let promises = [];
         promises.push(REST.forSphere(localSphereId).updateStone(TokenStore.stoneId,{updatedAt: updatedAt}));
         promises.push(REST.forSphere(localSphereId).updateLocation(cloudLocationId,   {updatedAt: updatedAt}));
-        // we set the updatedAt time in the cloud since changing the links does not update the time there
+        // we set the updatedAt time in the rest since changing the links does not update the time there
         return Promise.all(promises);
       })
   },
@@ -150,7 +150,7 @@ export const stones : stones_cloudModule = {
 
 
   /**
-   * request the data from this crownstone in the cloud
+   * request the data from this crownstone in the rest
    * @param localStoneId  database id of crownstone
    * @returns {*}
    */
@@ -184,7 +184,7 @@ export const stones : stones_cloudModule = {
   },
 
   /**
-   * Delete the data from this crownstone in the cloud in case of a failed setup or factory reset.
+   * Delete the data from this crownstone in the rest in case of a failed setup or factory reset.
    * stoneId  database id of crownstone
    * @returns {*}
    */

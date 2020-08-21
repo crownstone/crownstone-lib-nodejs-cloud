@@ -2,13 +2,13 @@ import {Util} from "../util/Util";
 
 import { prepareEndpointAndBody } from './cloudUtil'
 import { defaultHeaders } from './sections/cloudApiBase'
-import {CLOUD_ADDRESS} from "../CrownstoneCloud";
-const LOG = require('debug-level')('crownstone-cloud-core')
+const LOG = require('debug-level')('crownstone-rest-core')
 import fetch from 'cross-fetch';
+import {CLOUD_ADDRESS} from "../config";
 
 /**
  *
- * This method communicates with the cloud services.
+ * This method communicates with the rest services.
  *
  * @param options        // { endPoint: '/users/', data: JSON, type:'body'/'query' }
  * @param method
@@ -44,7 +44,7 @@ export function request(
       response.headers.map['content-type'].length > 0
       ) || response.headers.get && response.headers.get('content-type')) {
       // since RN 0.57, the response seems to have changed from what it was before. Presumably due to changes in Fetch.
-      // This could also be part of our cloud changes, this will work for both types of data now.
+      // This could also be part of our rest changes, this will work for both types of data now.
       let contentType = response.headers.map && response.headers.map['content-type'] || response.headers.get("content-type");
 
       if (!Array.isArray(contentType) && typeof contentType === 'string') {
@@ -76,7 +76,7 @@ export function request(
 
   // the actual request
   return new Promise((resolve, reject) => {
-    // this will eliminate all cloud requests.
+    // this will eliminate all rest requests.
     let stopRequest = false;
     let finishedRequest = false;
     // add a timeout for the fetching of data.
@@ -100,7 +100,7 @@ export function request(
       })
       .catch((parseError) => {
         // TODO: cleanly fix this
-        // LOGe.cloud("ERROR DURING PARSING:", parseError, "from request to:", CLOUD_ADDRESS + endPoint, "using config:", requestConfig);
+        // LOGe.rest("ERROR DURING PARSING:", parseError, "from request to:", CLOUD_ADDRESS + endPoint, "using config:", requestConfig);
         return '';
       })
       .then((parsedResponse) => {

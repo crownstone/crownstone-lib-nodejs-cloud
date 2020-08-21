@@ -1,6 +1,6 @@
 import {request} from "../../rest/cloudCore";
 
-const LOG = require('debug-level')('crownstone-cloud-api-base')
+const LOG = require('debug-level')('crownstone-rest-api-base')
 
 export const defaultHeaders = {
 'Accept': 'application/json',
@@ -32,7 +32,7 @@ export const WebhookStore = new WebhookStoreClass();
 
 
 /**
- * The cloud API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
+ * The rest API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
  * When the responses come back successfully, the convenience wrappers allow callbacks for relevant scenarios.
  */
 export const webhookApiBase : cloudApiBase_cloudModule = {

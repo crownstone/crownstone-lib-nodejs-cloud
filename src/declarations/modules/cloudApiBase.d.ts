@@ -11,7 +11,7 @@ interface requestOptions {
     noAccessToken?: boolean;
 }
 /**
- * The cloud API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
+ * The rest API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
  * When the responses come back successfully, the convenience wrappers allow callbacks for relevant scenarios.
  */
 interface cloudApiBase_cloudModule {

@@ -67,7 +67,7 @@ createMessage: function (data) {
   },
 
   addRecipient: function(recipientId) {
-    // recipientId is a userId, these are the same in the cloud as locally.
+    // recipientId is a userId, these are the same in the rest as locally.
     return cloudApiBase._setupRequest(
       'PUT',
       '/Messages/{id}/recipients/rel/' + recipientId,

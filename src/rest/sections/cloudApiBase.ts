@@ -1,5 +1,5 @@
 import {request} from '../cloudCore'
-const LOG = require('debug-level')('crownstone-cloud-api-base')
+const LOG = require('debug-level')('crownstone-rest-api-base')
 
 export const defaultHeaders = {
 'Accept': 'application/json',
@@ -39,7 +39,7 @@ export const TokenStore = new TokenStoreClass();
 
 
 /**
- * The cloud API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
+ * The rest API is designed to maintain the REST endpoints and to handle responses and errors on the network level.
  * When the responses come back successfully, the convenience wrappers allow callbacks for relevant scenarios.
  */
 export const cloudApiBase : cloudApiBase_cloudModule = {
@@ -75,12 +75,12 @@ export const cloudApiBase : cloudApiBase_cloudModule = {
   //         throw "File does not exist."
   //       }
   //       else {
-  //         LOGi.cloud("CloudAPIBase: file exists, continue upload");
+  //         LOGi.rest("CloudAPIBase: file exists, continue upload");
   //         let promise = request(options, 'POST', uploadHeaders, _getId(options.endPoint, TokenStore), TokenStore.accessToken, true);
   //         return this._finalizeRequest(promise, options);
   //       }
   //     })
-  //     .catch((err) => { LOGe.cloud("_uploadImage: failed to check if file exists:", err); })
+  //     .catch((err) => { LOGe.rest("_uploadImage: failed to check if file exists:", err); })
   // },
   // _download: function(options, toPath, beginCallback?, progressCallback?) {
   //   return download(options, _getId(options.endPoint, TokenStore), TokenStore.accessToken, toPath, beginCallback, progressCallback)
@@ -89,7 +89,7 @@ export const cloudApiBase : cloudApiBase_cloudModule = {
   //   return downloadFile(url, targetPath, callbacks);
   // },
   _handleNetworkError: function (error, options, endpoint, promiseBody, reject, startTime) {
-    // this will eliminate all cloud requests.
+    // this will eliminate all rest requests.
 
     this._networkErrorHandler(error);
     reject(error);
