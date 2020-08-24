@@ -4,3 +4,9 @@ interface requestOptions {
 }
 
 type requestType = 'query' | 'body';
+
+interface SwitchPair {
+  sphereId: string
+  stoneId: string,
+  state: number,
+}

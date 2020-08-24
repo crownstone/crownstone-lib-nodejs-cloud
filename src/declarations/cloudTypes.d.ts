@@ -71,6 +71,7 @@ interface cloud_Stone {
   currentPowerUsageId: string;
   currentEnergyUsageId: string;
   applianceId: string;
+  currentSwitchState?: cloud_SwitchState,
   currentSwitchStateId: string;
   abilities?: Ability[];
 }
@@ -151,4 +152,9 @@ interface cloud_EventListener {
   eventTypes: string[],
   url: string,
   ownerId: string,
+}
+
+interface cloud_SwitchState {
+  timestamp: string,
+  switchState: number
 }

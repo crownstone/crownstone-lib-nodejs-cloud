@@ -1,7 +1,7 @@
 import {CloudRequestorInterface} from "../tools/requestors";
 import {Crownstones} from "./crownstones";
 import {Spheres} from "./spheres";
-import {listCacheItemsInSphere} from "../tools/cache";
+import {listCacheItemsInSphere, listCacheItemsInSphereInLocation} from "../tools/cache";
 
 
 export class Locations {
@@ -43,7 +43,6 @@ export class Locations {
       }
       // not cached, download now.
       await this.downloadAllLocations()
-
       return await this.data();
     }
     // if we are here, we have all the required ids. We also have downloaded all required locations.
@@ -54,7 +53,12 @@ export class Locations {
   _getFilteredData() {
     let sphereIds = this.spheres?.sphereIds || [];
 
-    return listCacheItemsInSphere(this.rest.cache.locations, sphereIds, this.locationIds);
+    let itemsInCache = listCacheItemsInSphere(this.rest.cache.locations, sphereIds, this.locationIds);
+    this.locationIds = [];
+    for (let i = 0; i < itemsInCache.length; i++) {
+      this.locationIds.push(itemsInCache[i].id)
+    }
+    return itemsInCache;
   }
 
 
@@ -112,6 +116,7 @@ export class Locations {
 
     let filteredResult = [];
     let sphereIds = this.spheres?.sphereIds || [];
+    this.rest.cache.locations = {};
     locations.forEach((location) => {
       this.rest.cache.locations[location.id] = location;
       if (sphereIds.indexOf(location.sphereId) !== -1 || sphereIds.length === 0) {

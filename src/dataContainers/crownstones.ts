@@ -9,8 +9,9 @@ export class Crownstones {
   locations : Locations = null;
   spheres   : Spheres = null;
   rest : CloudRequestorInterface;
-  filter : filter = null
-  stoneIds = []
+  filter : filter = null;
+  stoneIds = [];
+
 
   constructor(cloudRequestor: CloudRequestorInterface, spheres: Spheres = null, locations: Locations = null, crownstoneIdentifier: filter = null) {
     this.rest = cloudRequestor;
@@ -30,6 +31,8 @@ export class Crownstones {
     let filteredResult = [];
     let sphereIds   = this.spheres?.sphereIds     || [];
     let locationIds = this.locations?.locationIds || [];
+
+    this.rest.cache.crownstones = {};
     stones.forEach((stone) => {
       this.rest.cache.crownstones[stone.id] = stone;
       if (sphereIds.indexOf(stone.sphereId) !== -1 || sphereIds.length === 0) {
@@ -41,9 +44,85 @@ export class Crownstones {
     return filteredResult;
   }
 
-  async setSwitchState(value: number) { throw "setSwitchState NOT IMPLEMENTED YET" }
-  async turnOn()                      { throw "turnOn NOT IMPLEMENTED YET" }
-  async turnOff()                     { throw "turnOff NOT IMPLEMENTED YET" }
+  id(id: string) {
+    this.stoneIds = [id];
+    return this;
+  }
+
+
+  /**
+   * this method will ensure we know which ID's to use for this request.
+   */
+  async prepare() {
+    if (this.stoneIds.length !== 0) { return; }
+    // the data method gets all required data to figure out which crownstones to switch.
+    await this.data();
+  }
+
+  async setMultiSwitch(switchData: SwitchPair[]) {
+    throw 'setMultiSwitch is not implemented yet';
+  }
+
+
+  async currentSwitchState() : Promise<number> {
+    await this.prepare();
+
+    if (this.stoneIds.length === 0) { return 0 }
+    if (this.stoneIds.length > 1) {
+      throw "For multiple Crownstones, use .currentSwitchStateData()";
+    }
+
+    let stoneId = this.stoneIds[0];
+    let data = await this.rest.getCurrentSwitchState(stoneId);
+    return data.switchState || 0;
+  }
+
+  async currentSwitchStateData() : Promise<{[stoneId: string]: cloud_SwitchState}> {
+    let switchStateData = {};
+    let data = await this.data();
+
+    for (let i = 0; i < data.length; i++) {
+      let stoneItem = data[i];
+
+      switchStateData[stoneItem.id] = stoneItem.currentSwitchState;
+    }
+    return switchStateData;
+  }
+
+  async setSwitch(value: number) {
+    await this.prepare()
+
+    if (this.stoneIds.length === 0) { return; }
+
+    // normalize value
+    if (value > 1) { value /= 100; }
+    value = Math.max(0,Math.min(1, value));
+
+    if (this.stoneIds.length > 1) {
+      let list : SwitchPair[] = [];
+      for (let i = 0; i < this.stoneIds.length; i++) {
+        let stoneId = this.stoneIds[i];
+        if (this.rest.cache.crownstones[stoneId] === undefined) {
+          await this.refresh();
+        }
+        // this can happen if a stone is deleted.
+        if (this.rest.cache.crownstones[stoneId] !== undefined) {
+          let stone = this.rest.cache.crownstones[stoneId];
+          list.push({sphereId: stone.sphereId, stoneId: stoneId, state: value})
+        }
+      }
+      return await this.setMultiSwitch(list);
+    }
+
+    await this.rest.switchCrownstone(this.stoneIds[0], value)
+  }
+
+  async turnOn() {
+    throw "turnOn NOT IMPLEMENTED YET"
+  }
+  async turnOff() {
+    throw "turnOff NOT IMPLEMENTED YET"
+  }
 
 
   _searchInCache() : boolean {
@@ -125,8 +204,7 @@ export class Crownstones {
         return this._getFilteredData()
       }
       // not cached, download now.
-      await this.downloadAllCrownstones()
-
+      await this.downloadAllCrownstones();
       return await this.data();
     }
 
@@ -140,6 +218,11 @@ export class Crownstones {
     let sphereIds = this.spheres?.sphereIds || [];
     let locationIds = this.locations?.locationIds || [];
 
-    return listCacheItemsInSphereInLocation(this.rest.cache.crownstones, sphereIds, locationIds, this.stoneIds);
+    let itemsInCache =  listCacheItemsInSphereInLocation(this.rest.cache.crownstones, sphereIds, locationIds, this.stoneIds);
+    this.stoneIds = [];
+    for (let i = 0; i < itemsInCache.length; i++) {
+      this.stoneIds.push(itemsInCache[i].id)
+    }
+    return itemsInCache;
   }
 }

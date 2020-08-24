@@ -57,6 +57,11 @@ export class CrownstoneCloud {
     return new Crownstones(this.rest, null, null, filter);
   }
 
+  crownstoneById(id: string) : Crownstones {
+    let cs = new Crownstones(this.rest, null, null, id);
+    return cs.id(id);
+  }
+
   async keys() : Promise<cloud_Keys> {
     if (this.toolchain.cache.keys !== null) {
       return this.toolchain.cache.keys;
@@ -75,7 +80,7 @@ export class CrownstoneCloud {
     }
   }
 
-  async userId() : Promise<cloud_User> {
+  async userId() : Promise<string> {
     if (this.toolchain.cache.user !== null ) {
       return this.toolchain.cache.user.id;
     }

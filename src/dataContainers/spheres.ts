@@ -24,6 +24,7 @@ export class Spheres {
       spheres = [await this.rest.getHubSphere()];
     }
 
+    this.rest.cache.spheres = {};
     spheres.forEach((sphere) => {
       this.rest.cache.spheres[sphere.id] = sphere;
     })
@@ -84,8 +85,8 @@ export class Spheres {
 
   }
 
-  keys() {
-
+  async keys() {
+    throw "SPHERE_KEYS not implemented yet"
   }
 
   async data() : Promise<cloud_Sphere[]> {
@@ -106,11 +107,11 @@ export class Spheres {
     // there is no filter, just return the spheres.
     else if (this.filter === null) {
       if (this.rest.cache.downloadedAll['spheres']) {
+        this.sphereIds = Object.keys(this.rest.cache.spheres);
         return listCache(this.rest.cache.spheres);
       }
       await this.downloadAllSpheres();
-
-      return listCache(this.rest.cache.spheres);
+      return await this.data();
     }
     return [];
   }
