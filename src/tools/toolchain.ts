@@ -1,5 +1,5 @@
 import { TokenStore } from "./tokens";
-import {CloudRequestor, CloudRequestorInterface} from "./requestors";
+import {CloudRequestor, CloudRequestorInterface, WebhookRequestor, WebhookRequestorInterface} from "./requestors";
 import { CacheStorage } from "./cache";
 
 
@@ -30,5 +30,9 @@ export class Toolchain {
 
   getCloudRequestor(customEndpoint?: string) : CloudRequestorInterface {
     return new CloudRequestor(this.tokenStore, this.cache, customEndpoint).interface()
+  }
+
+  getWebhookRequestor(customEndpoint?: string) : WebhookRequestorInterface {
+    return new WebhookRequestor(this.tokenStore, this.cache, customEndpoint).interface()
   }
 }

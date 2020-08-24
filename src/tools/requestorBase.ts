@@ -23,13 +23,18 @@ export class RequestorBase {
     return {};
   }
 
-  get hookSec() {
+  get hookSecurityAdmin() {
     if (this.tokenStore.webhooks.admin_key) {
       return { admin_key: this.tokenStore.webhooks.admin_key };
     }
-    else if (this.tokenStore.webhooks.api_key) {
+    return {};
+  }
+
+  get hookSecurityApi() {
+    if (this.tokenStore.webhooks.api_key) {
       return { api_key: this.tokenStore.webhooks.api_key };
     }
+    return {};
   }
 }
 

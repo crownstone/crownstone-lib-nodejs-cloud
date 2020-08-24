@@ -1,18 +1,26 @@
+import { Toolchain }                 from "./tools/toolchain";
+import { WebhookRequestorInterface } from "./tools/requestors";
 
-export class CrownstoneWebhooks{
+export class CrownstoneWebhooks {
 
-  adminKey : string
-  apiKey   : string
+  toolchain : Toolchain;
+  rest: WebhookRequestorInterface;
 
   constructor(customEndpoint?:string) {
+    this.toolchain = new Toolchain();
+    this.rest = this.toolchain.getWebhookRequestor(customEndpoint);
   }
 
   setApiKey(apiKey: string) {
-    this.apiKey = apiKey;
+    this.toolchain.tokenStore.webhooks.api_key = apiKey;
   }
 
   setAdminKey(adminKey: string) {
-    this.adminKey = adminKey;
+    this.toolchain.tokenStore.webhooks.admin_key = adminKey;
+  }
+
+  async isListenerActive(token: string) : Promise<boolean> {
+    return await this.rest.isListenerActive(token)
   }
 
 }

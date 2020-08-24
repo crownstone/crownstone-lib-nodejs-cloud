@@ -8,6 +8,7 @@ import { SphereRequests }     from "./requests/sphereRequests";
 import { UserRequests }       from "./requests/userRequests";
 import { HubRequests }        from "./requests/hubRequests";
 import { LocationRequests}    from "./requests/locationRequests";
+import {WebhookRequests} from "./requests/webhookRequests";
 
 
 
@@ -48,3 +49,23 @@ Util.applyMixins(CloudRequestor, [
   CrownstoneRequests
 ])
 
+
+export class WebhookRequestor extends RequestorBase {
+
+  constructor(tokenStore: TokenStore, cache: CacheStorage, customEndpoint: string = 'https://webhooks.crownstone.rocks/api/') {
+    super(tokenStore, cache);
+    this.setEndpoint(customEndpoint);
+  }
+
+  interface() : WebhookRequestorInterface {
+    // @ts-ignore
+    return this;
+  }
+}
+
+export interface WebhookRequestorInterface extends WebhookRequestor,
+  WebhookRequests {}
+
+Util.applyMixins(WebhookRequestor, [
+  WebhookRequests,
+])

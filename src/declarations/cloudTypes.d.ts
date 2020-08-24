@@ -132,6 +132,7 @@ interface cloud_SphereKey {
   ttl: number,
   createdAt: string
 }
+
 interface cloud_StoneKey {
   [stoneId: string] : {
     id: string,
@@ -140,5 +141,14 @@ interface cloud_StoneKey {
     ttl: number,
     createdAt: string
   },
+}
 
+interface cloud_EventListener {
+  id: string,
+  token: string,
+  userId: string,
+  expiresAt: string,
+  eventTypes: string[],
+  url: string,
+  ownerId: string,
 }
