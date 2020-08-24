@@ -1,9 +1,9 @@
 {
   "name": "crownstone-cloud",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "scripts": {
     "start": "tsc -watch",
-    "build": "tsc",
+    "build": "rimraf ./dist && tsc",
     "test": "jest --useStderr --clearMocks",
     "cleanTest": "jest --useStderr --no-cache --clearMocks"
   },
