@@ -29,6 +29,13 @@ export class UserRequests extends RequestorBase {
     this.cache.user = body;
     return body;
   }
+
+  async getUserId() : Promise<string> {
+    const {body} = await got.get(`${this.endpoint}users/userId`,  { ...this.security, responseType: 'json' });
+    this.tokenStore.cloudUser.userId = body;
+    return body;
+  }
+
 }
 
 

@@ -23,4 +23,18 @@ export class CrownstoneWebhooks {
     return await this.rest.isListenerActive(token)
   }
 
+  async createListener(userId: string, token: string, eventTypes: string[], url: string) : Promise<void> {
+    return await this.rest.createListener(userId, token, eventTypes, url);
+  }
+
+  async getListeners() : Promise<cloud_EventListener[]> {
+    return await this.rest.getListeners();
+  }
+
+  async removeListener(token: string) : Promise<void> {
+    return await this.rest.deleteListenerByToken(token);
+  }
+
+
+
 }

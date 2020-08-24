@@ -75,6 +75,18 @@ export class CrownstoneCloud {
     }
   }
 
+  async userId() : Promise<cloud_User> {
+    if (this.toolchain.cache.user !== null ) {
+      return this.toolchain.cache.user.id;
+    }
+    else if (this.toolchain.tokenStore.cloudUser.userId) {
+      return this.toolchain.tokenStore.cloudUser.userId;
+    }
+    else {
+      return this.rest.getUserId()
+    }
+  }
+
 }
 
 /**

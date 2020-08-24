@@ -26,5 +26,14 @@ export class WebhookRequests extends RequestorBase {
     return body;
   }
 
+  async deleteListenerByToken(token: string) : Promise<void> {
+    const {body} = await got.delete(`${this.endpoint}listeners/token`, {
+      ...this.hookSecurityApi,
+      searchParams: { token: token},
+      responseType: 'json'
+    });
+    return body;
+  }
+
 }
 
