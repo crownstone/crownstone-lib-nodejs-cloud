@@ -45,15 +45,15 @@ export class CrownstoneCloud {
     this.toolchain.loadAccessToken(accessToken);
   }
 
-  spheres(filter : filter) : Spheres {
+  spheres(filter : filter = null) : Spheres {
     return new Spheres(this.rest, filter)
   }
 
-  locations(filter: filter) : Locations {
+  locations(filter: filter = null) : Locations {
     return new Locations(this.rest, null, filter);
   }
 
-  crownstones(filter: filter) : Crownstones {
+  crownstones(filter: filter = null) : Crownstones {
     return new Crownstones(this.rest, null, null, filter);
   }
 
