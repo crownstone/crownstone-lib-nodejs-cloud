@@ -3,6 +3,7 @@ import {CloudRequestorInterface} from "./tools/requestors";
 import {Spheres} from "./dataContainers/Spheres";
 import {Locations} from "./dataContainers/locations";
 import {Crownstones} from "./dataContainers/crownstones";
+import {User} from "./dataContainers/user";
 const crypto = require('crypto');
 const shasum = crypto.createHash('sha1');
 
@@ -71,27 +72,9 @@ export class CrownstoneCloud {
     }
   }
 
-  async me() : Promise<cloud_User> {
-    if (this.toolchain.cache.user !== null) {
-      return this.toolchain.cache.user;
-    }
-    else {
-      return this.rest.getUserData()
-    }
+  me() : User {
+    return new User(this.rest);
   }
-
-  async userId() : Promise<string> {
-    if (this.toolchain.cache.user !== null ) {
-      return this.toolchain.cache.user.id;
-    }
-    else if (this.toolchain.tokenStore.cloudUser.userId) {
-      return this.toolchain.tokenStore.cloudUser.userId;
-    }
-    else {
-      return this.rest.getUserId()
-    }
-  }
-
 }
 
 /**

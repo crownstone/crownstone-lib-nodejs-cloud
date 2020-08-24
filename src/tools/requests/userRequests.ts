@@ -36,6 +36,11 @@ export class UserRequests extends RequestorBase {
     return body;
   }
 
+  async getCurrentLocation(userId) : Promise<cloud_UserLocation> {
+    const {body} = await got.get(`${this.endpoint}users/${userId}/currentLocation`,  { ...this.security, responseType: 'json' });
+    return body;
+  }
+
 }
 
 

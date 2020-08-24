@@ -158,3 +158,20 @@ interface cloud_SwitchState {
   timestamp: string,
   switchState: number
 }
+
+interface cloud_UserLocation {
+  deviceId: string,
+  deviceName: string,
+  inSpheres: inSphereLocation[]
+}
+
+interface inSphereLocation {
+  sphereId: string,
+  sphereName: string,
+  inLocation: inSphereLocationData[]
+}
+
+interface inSphereLocationData {
+  locationId: string,
+  locationName: string
+}
