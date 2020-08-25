@@ -20,25 +20,26 @@ export class UserRequests extends RequestorBase {
   async getKeys() : Promise<cloud_Keys> {
     if (this.tokenStore.cloudUser.userId === undefined) { throw "No user logged in. If you logged in as a hub, remember that hubs cannot get keys."; }
 
-    const {body} = await got.get(`${this.endpoint}users/${this.tokenStore.cloudUser.userId}/keysV2`,  { ...this.security, responseType: 'json' });
-    return body;
+    const {body} = await got.get(`${this.endpoint}users/${this.tokenStore.cloudUser.userId}/keysV2`, this.addSecurity({ responseType: 'json' }));
+    return body as any;
   }
 
   async getUserData() : Promise<cloud_UserData> {
-    const {body} = await got.get(`${this.endpoint}users/me`,  { ...this.security, responseType: 'json' });
-    this.cache.user = body;
-    return body;
+    const {body} = await got.get(`${this.endpoint}users/me`,  this.addSecurity({ responseType: 'json' }));
+    let userData = body as any;
+    this.cache.user = userData;
+    return userData;
   }
 
   async getUserId() : Promise<string> {
-    const {body} = await got.get(`${this.endpoint}users/userId`,  { ...this.security, responseType: 'json' });
+    const {body} = await got.get(`${this.endpoint}users/userId`, this.addSecurity({ responseType: 'json' }));
     this.tokenStore.cloudUser.userId = body;
     return body;
   }
 
   async getCurrentLocation(userId) : Promise<cloud_UserLocation> {
-    const {body} = await got.get(`${this.endpoint}users/${userId}/currentLocation`,  { ...this.security, responseType: 'json' });
-    return body;
+    const {body} = await got.get(`${this.endpoint}users/${userId}/currentLocation`, this.addSecurity({ responseType: 'json' }));
+    return body as any;
   }
 
 }

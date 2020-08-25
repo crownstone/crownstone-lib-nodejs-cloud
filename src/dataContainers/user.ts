@@ -21,7 +21,7 @@ export class User {
 
   async id() : Promise<string> {
     if (this.rest.cache.user === null && !this.rest.tokenStore.cloudUser.userId) {
-      await this.rest.getUserId()
+      await this.rest.getUserId();
       return this.id();
     }
     else {

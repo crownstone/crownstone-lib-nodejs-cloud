@@ -13,14 +13,24 @@ export class RequestorBase {
   }
 
   setEndpoint(endpoint: string) {
-    this.endpoint = endpoint;
+    if (endpoint[endpoint.length-1] !== '/') {
+      this.endpoint = endpoint + '/';
+    }
+    else {
+      this.endpoint = endpoint;
+    }
   }
 
-  get security() {
+  addSecurity(options) : any {
     if (this.tokenStore.accessToken) {
-      return { headers: { Authorization: this.tokenStore.accessToken }};
+      if (this.tokenStore.accessToken.length > 32) {
+        return {...options, headers: {...options.headers, Authorization: this.tokenStore.accessToken}};
+      } else {
+        return {...options, searchParams: {...options.searchParams, access_token: this.tokenStore.accessToken}};
+      }
     }
-    return {};
+
+    return options;
   }
 
   get hookSecurityAdmin() {
