@@ -3,8 +3,8 @@ import {RequestorBase} from "../requestorBase";
 
 export class WebhookRequests extends RequestorBase {
 
-  async isListenerActive(token: string) : Promise<boolean> {
-    const {body} = await got.get(`${this.endpoint}listeners/active`, { ...this.hookSecurityApi, searchParams: {token: token} , responseType: 'json' });
+  async isListenerActive(token: string = '', userId: string = '') : Promise<boolean> {
+    const {body} = await got.get(`${this.endpoint}listeners/active`, { ...this.hookSecurityApi, searchParams: {token, userId} , responseType: 'json' });
     return body;
   }
 
@@ -30,6 +30,15 @@ export class WebhookRequests extends RequestorBase {
     const {body} = await got.delete(`${this.endpoint}listeners/token`, {
       ...this.hookSecurityApi,
       searchParams: { token: token},
+      responseType: 'json'
+    });
+    return body;
+  }
+
+  async deleteListenerByUserId(userId: string) : Promise<void> {
+    const {body} = await got.delete(`${this.endpoint}listeners/userId`, {
+      ...this.hookSecurityApi,
+      searchParams: { userId: userId},
       responseType: 'json'
     });
     return body;
