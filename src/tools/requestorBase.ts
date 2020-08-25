@@ -35,14 +35,14 @@ export class RequestorBase {
 
   get hookSecurityAdmin() {
     if (this.tokenStore.webhooks.admin_key) {
-      return { admin_key: this.tokenStore.webhooks.admin_key };
+      return { headers: { admin_key: this.tokenStore.webhooks.admin_key } };
     }
     return {};
   }
 
   get hookSecurityApi() {
     if (this.tokenStore.webhooks.api_key) {
-      return { api_key: this.tokenStore.webhooks.api_key };
+      return { headers: { api_key: this.tokenStore.webhooks.api_key } };
     }
     return {};
   }
