@@ -3,7 +3,7 @@ import {RequestorBase} from "../requestorBase";
 import {gotAllInSphere} from "../cache";
 
 
-let filter = {searchParams: JSON.stringify({})}
+let filter = {searchParams: {filter: JSON.stringify({})}}
 
 export class LocationRequests extends RequestorBase {
 

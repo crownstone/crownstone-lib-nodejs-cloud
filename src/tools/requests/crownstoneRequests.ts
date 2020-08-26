@@ -3,7 +3,7 @@ import {RequestorBase} from "../requestorBase";
 import {gotAllInSphere} from "../cache";
 
 
-let filter = {searchParams: JSON.stringify({filter:{"include":["locations", "currentSwitchState", {"abilities":"properties"}, "behaviours"]}})}
+let filter = {searchParams: {filter: JSON.stringify({"include":["locations", "currentSwitchState", {"abilities":"properties"}, "behaviours"]})}}
 
 export class CrownstoneRequests extends RequestorBase {
 
