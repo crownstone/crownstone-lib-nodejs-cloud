@@ -85,8 +85,31 @@ export class Spheres {
 
   }
 
-  async keys() {
-    throw "SPHERE_KEYS not implemented yet"
+  async keys() : Promise<cloud_Keys[]> {
+    let keys : cloud_Keys[] = [];
+    if (this.rest.cache.keys !== null) {
+      keys = this.rest.cache.keys;
+    }
+    else {
+      keys = await this.rest.getKeys()
+    }
+
+    if (this.sphereIds.length === 0) {
+      await this.data();
+    }
+
+    let requiredKeys = [];
+
+    this.sphereIds.forEach((sphereId) => {
+      for (let i = 0; i < keys.length; i++) {
+        if (keys[i].sphereId === sphereId) {
+          requiredKeys.push(keys[i]);
+          return;
+        }
+      }
+    })
+
+    return requiredKeys;
   }
 
   async data() : Promise<cloud_Sphere[]> {

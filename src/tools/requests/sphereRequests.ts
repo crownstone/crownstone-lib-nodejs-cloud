@@ -1,18 +1,18 @@
-import got from "got";
 import {RequestorBase} from "../requestorBase";
+import {req} from "../../util/request";
 
 
 export class SphereRequests extends RequestorBase {
 
   async getSpheres() : Promise<cloud_Sphere[]> {
-    const {body} = await got.get(`${this.endpoint}users/${this.tokenStore.cloudUser.userId}/spheres`, this.addSecurity({responseType: 'json' }));
+    const {body} = await req("GET",`${this.endpoint}users/${this.tokenStore.cloudUser.userId}/spheres`, this.addSecurity({responseType: 'json' }));
 
     this.cache.downloadedAll['spheres'] = true;
     return body as any;
   }
 
   async getSphere(sphereId) : Promise<cloud_Sphere> {
-    const {body} = await got.get(`${this.endpoint}Spheres/${sphereId}`, this.addSecurity({ responseType: 'json' }));
+    const {body} = await req("GET",`${this.endpoint}Spheres/${sphereId}`, this.addSecurity({ responseType: 'json' }));
     return body as any;
   }
 
@@ -20,7 +20,7 @@ export class SphereRequests extends RequestorBase {
     if (this.tokenStore.cloudHub.hubId    === undefined) { throw "No Hub loaded."; }
     let sphereId = undefined;
     if (this.tokenStore.cloudHub.sphereId === undefined) {
-      let {body} = await got.get(`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ responseType: 'json' }));
+      let {body} = await req("GET",`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ responseType: 'json' }));
       let hubData = body as any;
       this.cache.hubs[hubData.id] = hubData;
       sphereId = hubData.sphereId;

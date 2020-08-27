@@ -1,0 +1,42 @@
+import got from "got";
+const LOG = require('debug-level')('crownstone-cloud-requests')
+
+type requestType = "POST" | "GET" | "DELETE" | "PUT" | "PATCH"
+
+
+
+export async function req(type: requestType, url: string, options) : Promise<any> {
+  let token = Math.floor(Math.random()*1e8).toString(36);
+  logRequest(type, url, options, token);
+  let result;
+  try {
+    switch (type) {
+      case "POST":
+        result = await got.post(url, options);
+      case "GET":
+        result = await got.get(url, options);
+      case "DELETE":
+        result = await got.delete(url, options);
+      case "PUT":
+        result = await got.put(url, options);
+      case "PATCH":
+        result = await got.patch(url, options);
+    }
+    LOG.debug("Request result", result, token)
+    return result;
+  }
+  catch (err) {
+    LOG.error("Something went wrong with request", token, err);
+    throw err;
+  }
+}
+
+
+function logRequest(type: requestType, url: string, options, token: string) {
+  let headers = options.headers || null;
+  let queryParams = options.searchParams || null;
+  let bodyParams = options.json || null;
+  let responseType = options.responseType;
+
+  LOG.info("sending", type, "request to", url, 'headers:', headers, 'queryParams:', queryParams, 'bodyParams:', bodyParams, 'responseType', responseType, token);
+}

@@ -1,10 +1,10 @@
-import got from "got";
 import {RequestorBase} from "../requestorBase";
+import {req} from "../../util/request";
 
 export class HubRequests extends RequestorBase {
 
   async hubLogin() : Promise<cloud_LoginReply> {
-    const {body} = await got.post(`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/login`, {
+    const {body} = await req("POST",`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/login`, {
       searchParams: {
         token: this.tokenStore.cloudHub.hubToken
       },

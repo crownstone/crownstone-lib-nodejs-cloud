@@ -8,7 +8,7 @@ export class CacheStorage {
   crownstones:  { [stoneId: string]    : cloud_Stone    } = {};
   locations:    { [locationId: string] : cloud_Location } = {};
   users:        { [userId: string]     : cloud_User     } = {};
-  keys:           cloud_Keys = null;
+  keys:           cloud_Keys[] = null;
   hubs:         { [hubId: string]      : cloud_Hub      } = {};
   user:         cloud_UserData = null
 

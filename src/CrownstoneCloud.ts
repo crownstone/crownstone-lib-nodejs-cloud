@@ -63,12 +63,12 @@ export class CrownstoneCloud {
     return cs.id(id);
   }
 
-  async keys() : Promise<cloud_Keys> {
+  async keys() : Promise<cloud_Keys[]> {
     if (this.toolchain.cache.keys !== null) {
       return this.toolchain.cache.keys;
     }
     else {
-      return this.rest.getKeys()
+      return await this.rest.getKeys()
     }
   }
 
