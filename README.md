@@ -32,7 +32,7 @@ yarn add crownstone-cloud
 npm install crownstone-cloud
 ```
 
-#Usage
+# Usage
 
 To use the CrownstoneCloud module, just import it:
 ```
@@ -48,9 +48,9 @@ const csLib = require("crownstone-cloud")
 const cloud = new cloudLib.CrownstoneCloud();
 ```
 
-#Getting started
+# Getting started
 
-You can use this library as promises or async/await. We will only show async/await here, but all async functions are promises. 
+You can use this library as promises or async/await. We will only show async/await here, but all *async* functions are promises. 
 This means, everything that can be awaited, can be thenned. More information available on Google.
 
 ### Create instance
@@ -112,11 +112,11 @@ Since you might have a kitchen in sphere1 and a kitchen in sphere2, you can also
 let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crownstones();
 ```
 
-#API
+# API
 
-###CrownstoneCloud
+### CrownstoneCloud
 
-#### async login(email: string, password: string) : Promise\<UserLoginData>
+#### *async* login(email: string, password: string) : Promise\<UserLoginData>
 >> email: the email address of your Crownstone account.
 >>
 >> password: the corresponding password.
@@ -126,7 +126,7 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 > You use this method to login to the Crownstone Cloud. Your userId and accesstoken will be cached in the CrownstoneCloud class instance.
 
 
-#### async loginHashed(email: string, hashedPassword: string) : Promise\<UserLoginData> 
+#### *async* loginHashed(email: string, hashedPassword: string) : Promise\<UserLoginData> 
 >> email: the email address of your Crownstone account.
 >>
 >> hashedPassword: sha1 hash of the corresponding password.
@@ -186,7 +186,7 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 > you can directly switch a Crownstone without this additional request, speeding up your implementation.
 
 
-#### async keys() : Promise\<cloud_Keys[]> 
+#### *async* keys() : Promise\<cloud_Keys[]> 
 >> returns cloud_Keys[]: JSON containing keys for all spheres. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts#L113) 
 >
 > These keys can be used for any bluetooth related operations
@@ -197,21 +197,21 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 > Use this to get the user object, from which you can get you userId, userData and location.
 
 
-###Spheres
+### Spheres
 This class is not meant to be created directly, you get this from the CrownstoneCloud. If you have received this class using a filter,
  this class represents all spheres that have been filtered, and all subsequent items called on this object will also belong to these spheres.
 
-#### async data() : Promise<cloud_Sphere[]>
+#### *async* data() : Promise<cloud_Sphere[]>
 >> returns cloud_Sphere[]: JSON containing the data for all spheres that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
 >
 > This method will get the sphere data from the cloud. If it has been obtained once, it will be cached and returned directly the next time this method is called.
 
-#### async refresh() : Promise<self>
+#### *async* refresh() : Promise<self>
 >> returns Spheres. This is the same class as this method was called upon so you can chain after it. 
 >
 > This method will refresh the cache of data for this sphere collection. This does not include all items downstream, like locations and Crownstones. Just the Sphere Data.
 
-#### async keys() : Promise\<cloud_Keys[]> 
+#### *async* keys() : Promise\<cloud_Keys[]> 
 >> returns cloud_Keys[]: JSON containing keys for all spheres that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts#L113) 
 >
 > These keys can be used for any bluetooth related operations
@@ -238,12 +238,12 @@ This class is not meant to be created directly, you get this from the Crownstone
 This class is not meant to be created directly, you get this from the CrownstoneCloud or via the Spheres. If you have received this class using a filter,
  this class represents all locations that have been filtered, and all subsequent items called on this object will also belong to these locations.
  
- #### async data() : Promise<cloud_Location[]>
+ #### *async* data() : Promise<cloud_Location[]>
  >> returns cloud_Location[]: JSON containing the data for all locations that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
  >
  > This method will get the location data from the cloud. If it has been obtained once, it will be cached and returned directly the next time this method is called.
  
- #### async refresh() : Promise<self>
+ #### *async* refresh() : Promise<self>
  >> returns Locations. This is the same class as this method was called upon so you can chain after it. 
  >
  > This method will refresh the cache of data for this location collection. This does not include all items downstream like the Crownstones. Just the Location Data.
@@ -261,38 +261,38 @@ This class is not meant to be created directly, you get this from the Crownstone
 This class is not meant to be created directly, you get this from the CrownstoneCloud or via the Spheres. If you have received this class using a filter,
  this class represents all locations that have been filtered, and all subsequent items called on this object will also belong to these locations.
  
- #### async data() : Promise<cloud_Stone[]>
+ #### *async* data() : Promise<cloud_Stone[]>
  >> returns cloud_Stone[]: JSON containing the data for all locations that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
  >
  > This method will get the Crownstone data from the cloud. If it has been obtained once, it will be cached and returned directly the next time this method is called.
  
- #### async refresh() : Promise<self>
+ #### *async* refresh() : Promise<self>
  >> returns Crownstones. This is the same class as this method was called upon so you can chain after it. 
  >
  > This method will refresh the cache of data for this Crownstone collection.
 
-####  async currentSwitchState() : Promise<number> 
+#### *async* currentSwitchState() : Promise<number> 
 >> returns the current switchstate between 0 and 1.
 >
 >This assumes that there is only one Crownstone selected by the filter or that it came from crownstoneById. If not, an error will be thrown.
 
-####  async currentSwitchStateData() : Promise<{[stoneId: string]: cloud_SwitchState}> 
+#### *async* currentSwitchStateData() : Promise<{[stoneId: string]: cloud_SwitchState}> 
 >> returns the current switchstate for all Crownstones matching the filter conditions.  cloud_Switchstate: { timestamp: string, switchState: number }
 >
 >You can use this to get the current switchstate for a collection of Crownstones.
 
-####  async setSwitch(value: number)
+#### *async* setSwitch(value: number)
 >> value: number between 0 and 1.
 >
 >This will switch the Crownstone(s) to the provided state. It will affect all Crownstones in the selection. Currently only 1 Crownstone supported.
  
-####  async turnOn() 
+#### *async* turnOn() 
 >This will turn the Crownstones matching the filter conditions on. On respects any behaviour or twilight intensity preference, unlike setSwitch(1), which turns the Crownstone fully on.
 
-####  async turnOff() 
+#### *async* turnOff() 
 >This will turn the Crownstones matching the filter conditions off.
 
-####  async setMultiSwitch(switchData: SwitchData[])
+#### *async* setMultiSwitch(switchData: SwitchData[])
  >> switchData: Array of SwitchData. Filtering before does not affect this method since everything is specified. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/declarations.d.ts)
  >
  > Use this method if you want to switch multiple Crownstones at the same time. 
