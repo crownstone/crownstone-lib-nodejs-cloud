@@ -110,6 +110,9 @@ interface cloud_User {
 
 }
 
+interface UserLoginData { accessToken: string, ttl: number, userId: string }
+interface HubLoginData  { accessToken: string, ttl: number }
+
 interface cloud_Keys {
   sphereId: string,
   sphereAuthorizationToken: string,

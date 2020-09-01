@@ -5,8 +5,9 @@ interface requestOptions {
 
 type requestType = 'query' | 'body';
 
-interface SwitchPair {
+interface SwitchData {
   sphereId: string
   stoneId: string,
-  state: number,
+  type: 'SET_STATE' | 'TURN_ON' | 'TURN_OFF'
+  state?: number,
 }

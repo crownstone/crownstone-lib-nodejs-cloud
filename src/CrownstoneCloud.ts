@@ -7,8 +7,6 @@ import {User} from "./dataContainers/user";
 const crypto = require('crypto');
 const shasum = crypto.createHash('sha1');
 
-interface UserLoginData { accessToken: string, ttl: number, userId: string }
-interface HubLoginData  { accessToken: string, ttl: number }
 
 export class CrownstoneCloud {
 
@@ -42,8 +40,8 @@ export class CrownstoneCloud {
     return {accessToken: result.id, ttl: result.ttl};
   }
 
-  setAccessToken(accessToken: string) {
-    this.toolchain.loadAccessToken(accessToken);
+  setAccessToken(accessToken: string, userId?: string) {
+    this.toolchain.loadAccessToken(accessToken, userId);
   }
 
   spheres(filter : filter = null) : Spheres {

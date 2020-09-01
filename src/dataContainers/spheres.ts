@@ -76,7 +76,6 @@ export class Spheres {
   }
 
 
-
   locations(filter: filter) : Locations {
     return new Locations(this.rest, this, filter);
   }

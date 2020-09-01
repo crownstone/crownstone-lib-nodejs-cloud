@@ -59,7 +59,7 @@ export class Crownstones {
     await this.data();
   }
 
-  async setMultiSwitch(switchData: SwitchPair[]) {
+  async setMultiSwitch(switchData: SwitchData[]) {
     throw 'setMultiSwitch is not implemented yet';
   }
 
@@ -99,7 +99,7 @@ export class Crownstones {
     value = Math.max(0,Math.min(1, value));
 
     if (this.stoneIds.length > 1) {
-      let list : SwitchPair[] = [];
+      let list : SwitchData[] = [];
       for (let i = 0; i < this.stoneIds.length; i++) {
         let stoneId = this.stoneIds[i];
         if (this.rest.cache.crownstones[stoneId] === undefined) {
@@ -108,7 +108,7 @@ export class Crownstones {
         // this can happen if a stone is deleted.
         if (this.rest.cache.crownstones[stoneId] !== undefined) {
           let stone = this.rest.cache.crownstones[stoneId];
-          list.push({sphereId: stone.sphereId, stoneId: stoneId, state: value})
+          list.push({sphereId: stone.sphereId, type:'SET_STATE', stoneId: stoneId, state: value*100})
         }
       }
       return await this.setMultiSwitch(list);
