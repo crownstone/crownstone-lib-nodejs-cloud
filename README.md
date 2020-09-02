@@ -32,6 +32,15 @@ yarn add crownstone-cloud
 npm install crownstone-cloud
 ```
 
+# Building the JS files
+
+If you just want to run the library, without getting it from npm, you will have to build the typescript files to run the examples.
+You can do this by running:
+
+```
+npm run build
+```
+
 # Usage
 
 To use the CrownstoneCloud module, just import it:
@@ -121,7 +130,7 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 >>
 >> password: the corresponding password.
 >>
->> @returns UserLoginData: { accessToken: string, ttl: number, userId: string }
+>> returns UserLoginData: { accessToken: string, ttl: number, userId: string }
 >
 > You use this method to login to the Crownstone Cloud. Your userId and accesstoken will be cached in the CrownstoneCloud class instance.
 
@@ -131,7 +140,7 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 >>
 >> hashedPassword: sha1 hash of the corresponding password.
 >>
->> @returns UserLoginData: { accessToken: string, ttl: number, userId: string }
+>> returns UserLoginData: { accessToken: string, ttl: number, userId: string }
 >
 > You use this method to login to the Crownstone Cloud. Your userId and accesstoken will be cached in the CrownstoneCloud class instance.
 
@@ -140,7 +149,7 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 >>
 >> hubToken: secret token of the hub
 >>
->> @returns HubLoginData: { accessToken: string, ttl: number }
+>> returns HubLoginData: { accessToken: string, ttl: number }
 >
 > You use this method to login to the Crownstone Cloud if you're a hub. Your accesstoken will be cached in the CrownstoneCloud class instance.
 
