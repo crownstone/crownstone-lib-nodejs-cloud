@@ -74,7 +74,9 @@ export class Crownstones {
 
     let stoneId = this.stoneIds[0];
     let data = await this.rest.getCurrentSwitchState(stoneId);
-    return data.switchState || 0;
+    let switchState = data.switchState || 0;
+    if (switchState > 0 && switchState <= 1) { return switchState*100 }
+    return data.switchState;
   }
 
   async currentSwitchStateData() : Promise<{[stoneId: string]: cloud_SwitchState}> {
@@ -84,19 +86,39 @@ export class Crownstones {
     for (let i = 0; i < data.length; i++) {
       let stoneItem = data[i];
 
+      let switchState = stoneItem.currentSwitchState.switchState || 0;
+      if (switchState > 0 && switchState <= 1) { switchState *= switchState*100 }
+      stoneItem.currentSwitchState.switchState = switchState;
+
       switchStateData[stoneItem.id] = stoneItem.currentSwitchState;
     }
+
     return switchStateData;
   }
 
+
   async setSwitch(value: number) {
+    await this._switch({type:"PERCENTAGE", percentage: value})
+  }
+
+  async turnOn() {
+    await this._switch({type:"TURN_ON"})
+  }
+
+  async turnOff() {
+    await this._switch({type:"TURN_OFF"})
+  }
+
+
+  async _switch(switchData : StoneSwitchData) {
     await this.prepare()
 
     if (this.stoneIds.length === 0) { return; }
 
+    let value = switchData.percentage;
     // normalize value
-    if (value > 1) { value /= 100; }
-    value = Math.max(0,Math.min(1, value));
+    if (value > 0 && value <= 1) { value *= 100; }
+    value = Math.max(0,Math.min(100, value));
 
     if (this.stoneIds.length > 1) {
       let list : SwitchData[] = [];
@@ -108,20 +130,13 @@ export class Crownstones {
         // this can happen if a stone is deleted.
         if (this.rest.cache.crownstones[stoneId] !== undefined) {
           let stone = this.rest.cache.crownstones[stoneId];
-          list.push({sphereId: stone.sphereId, type:'SET_STATE', stoneId: stoneId, state: value*100})
+          list.push({sphereId: stone.sphereId, type: switchData.type, stoneId: stoneId, percentage: value})
         }
       }
       return await this.setMultiSwitch(list);
     }
 
-    await this.rest.switchCrownstone(this.stoneIds[0], value)
-  }
-
-  async turnOn() {
-    throw "turnOn NOT IMPLEMENTED YET"
-  }
-  async turnOff() {
-    throw "turnOff NOT IMPLEMENTED YET"
+    await this.rest.switchCrownstone(this.stoneIds[0], {type: switchData.type, percentage: value})
   }
 
 

@@ -17,12 +17,6 @@ The rest of this document is only regarding the Crownstone Cloud API.
 
 # Installation
 
-To install all the dependencies, run yarn or npm install
-
-```
-yarn
-```
-
 If you want to use this library as part of your own codebase, install it using yarn or npm
 
 ```
@@ -32,32 +26,17 @@ yarn add crownstone-cloud
 npm install crownstone-cloud
 ```
 
-# Building the JS files
+# Cloning the repository
 
-If you just want to run the library, without getting it from npm, you will have to build the typescript files to run the examples.
+If you just want to run the library, without getting it from npm, you will have to build manually install the dependencies and build the typescript files to run the examples.
 You can do this by running:
 
 ```
-npm run build
-```
-
-# Usage
-
-To use the CrownstoneCloud module, just import it:
-```
-import {CrownstoneCloud} from 'crownstone-cloud';
-
-const cloud = new CrownstoneCloud();
-```
-
-If you're using pure node, you can also use require:
-```
-const csLib = require("crownstone-cloud")
-
-const cloud = new cloudLib.CrownstoneCloud();
+npm install && npm run build
 ```
 
 # Getting started
+
 
 You can use this library as promises or async/await. We will only show async/await here, but all *async* functions are promises. 
 This means, everything that can be awaited, can be thenned. More information available on Google.
@@ -72,6 +51,13 @@ import {CrownstoneCloud} from 'crownstone-cloud';
 
 const cloud = new CrownstoneCloud();
 ```
+If you're using pure node, you can also use require:
+```
+const csLib = require("crownstone-cloud")
+
+const cloud = new csLib.CrownstoneCloud();
+```
+
 
 
 ### Logging in / authenticating
@@ -281,22 +267,22 @@ This class is not meant to be created directly, you get this from the Crownstone
  > This method will refresh the cache of data for this Crownstone collection.
 
 #### *async* currentSwitchState() : Promise<number> 
->> returns the current switchstate between 0 and 1.
+>> returns the current switchstate between 0 and 100.
 >
 >This assumes that there is only one Crownstone selected by the filter or that it came from crownstoneById. If not, an error will be thrown.
 
 #### *async* currentSwitchStateData() : Promise<{[stoneId: string]: cloud_SwitchState}> 
->> returns the current switchstate for all Crownstones matching the filter conditions.  cloud_Switchstate: { timestamp: string, switchState: number }
+>> returns the current switchstate for all Crownstones matching the filter conditions.  cloud_Switchstate: { timestamp: string, switchState: number } where switchState is between 0 and 100.
 >
 >You can use this to get the current switchstate for a collection of Crownstones.
 
-#### *async* setSwitch(value: number)
->> value: number between 0 and 1.
+#### *async* setSwitch(percentage: number)
+>> value: number between 0 and 100.
 >
 >This will switch the Crownstone(s) to the provided state. It will affect all Crownstones in the selection. Currently only 1 Crownstone supported.
  
 #### *async* turnOn() 
->This will turn the Crownstones matching the filter conditions on. On respects any behaviour or twilight intensity preference, unlike setSwitch(1), which turns the Crownstone fully on.
+>This will turn the Crownstones matching the filter conditions on. On respects any behaviour or twilight intensity preference, unlike setSwitch(100), which turns the Crownstone fully on.
 
 #### *async* turnOff() 
 >This will turn the Crownstones matching the filter conditions off.

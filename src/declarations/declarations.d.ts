@@ -8,6 +8,11 @@ type requestType = 'query' | 'body';
 interface SwitchData {
   sphereId: string
   stoneId: string,
-  type: 'SET_STATE' | 'TURN_ON' | 'TURN_OFF'
-  state?: number,
+  type: 'PERCENTAGE' | 'TURN_ON' | 'TURN_OFF'
+  percentage?: number,
+}
+
+interface StoneSwitchData {
+  type: 'PERCENTAGE' | 'TURN_ON' | 'TURN_OFF',
+  percentage?: number
 }

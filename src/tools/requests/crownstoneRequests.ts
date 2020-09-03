@@ -25,13 +25,12 @@ export class CrownstoneRequests extends RequestorBase {
     return body as any;
   }
 
-  async switchCrownstone(stoneId, switchState: number) : Promise<void> {
-    console.log("put", `${this.endpoint}Stones/${stoneId}/setSwitchStateRemotely`, this.addSecurity({ searchParams: { switchState: switchState } }))
-    await req("PUT",`${this.endpoint}Stones/${stoneId}/setSwitchStateRemotely`, this.addSecurity({ searchParams: { switchState: switchState } }));
+  async switchCrownstone(stoneId, stoneSwitchData: StoneSwitchData) : Promise<void> {
+    await req("POST",`${this.endpoint}Stones/${stoneId}/switch`, this.addSecurity({ json: stoneSwitchData }));
   }
 
   async getCurrentSwitchState(stoneId) : Promise<cloud_SwitchState> {
-    const {body} = await req("GET",`${this.endpoint}Stones/${stoneId}/currentSwitchState`, this.addSecurity({ ...filter, responseType: 'json' }));
+    const {body} = await req("GET",`${this.endpoint}Stones/${stoneId}/currentSwitchStateV2`, this.addSecurity({ ...filter, responseType: 'json' }));
     return body as any;
   }
 }
