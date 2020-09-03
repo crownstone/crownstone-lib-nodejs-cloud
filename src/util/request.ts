@@ -12,15 +12,15 @@ export async function req(type: requestType, url: string, options) : Promise<any
   try {
     switch (type) {
       case "POST":
-        result = await got.post(url, options);
+        result = await got.post(url, options); break;
       case "GET":
-        result = await got.get(url, options);
+        result = await got.get(url, options); break;
       case "DELETE":
-        result = await got.delete(url, options);
+        result = await got.delete(url, options); break;
       case "PUT":
-        result = await got.put(url, options);
+        result = await got.put(url, options); break;
       case "PATCH":
-        result = await got.patch(url, options);
+        result = await got.patch(url, options); break;
     }
     LOG.debug("Request result", result, token)
     return result;

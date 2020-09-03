@@ -98,15 +98,15 @@ export class Crownstones {
 
 
   async setSwitch(value: number) {
-    await this._switch({type:"PERCENTAGE", percentage: value})
+    await this._switch({type:"PERCENTAGE", percentage: value});
   }
 
   async turnOn() {
-    await this._switch({type:"TURN_ON"})
+    await this._switch({type:"TURN_ON"});
   }
 
   async turnOff() {
-    await this._switch({type:"TURN_OFF"})
+    await this._switch({type:"TURN_OFF"});
   }
 
 
