@@ -1,5 +1,5 @@
 let cloudLib = require("../dist/")
-let cloud = new cloudLib.SphereCloud();
+let cloud = new cloudLib.CrownstoneCloud();
 
 /**
 
