@@ -30,7 +30,7 @@ export class CrownstoneRequests extends RequestorBase {
   }
 
   async getCurrentSwitchState(stoneId) : Promise<cloud_SwitchState> {
-    const {body} = await req("GET",`${this.endpoint}Stones/${stoneId}/currentSwitchStateV2`, this.addSecurity({ ...filter, responseType: 'json' }));
+    const {body} = await req("GET",`${this.endpoint}Stones/${stoneId}/currentSwitchStateV2`, this.addSecurity({ responseType: 'json' }));
     return body as any;
   }
 }
