@@ -19,8 +19,7 @@ export class CrownstoneCloud {
   }
 
   async login(email: string, password: string) : Promise<UserLoginData> {
-    shasum.update(String(password));
-    let hashedPassword = shasum.digest('hex');
+    let hashedPassword = this.hashPassword(password);
     return await this.loginHashed(email, hashedPassword)
   }
 
@@ -38,6 +37,12 @@ export class CrownstoneCloud {
 
     this.toolchain.loadAccessToken(result.id);
     return {accessToken: result.id, ttl: result.ttl};
+  }
+
+  hashPassword(plaintextPassword: string) : string {
+    shasum.update(String(plaintextPassword));
+    let hashedPassword = shasum.digest('hex');
+    return hashedPassword;
   }
 
   setAccessToken(accessToken: string, userId?: string) {

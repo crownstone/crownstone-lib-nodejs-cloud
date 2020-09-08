@@ -130,6 +130,14 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 >
 > You use this method to login to the Crownstone Cloud. Your userId and accesstoken will be cached in the CrownstoneCloud class instance.
 
+
+#### hashPassword(plaintextPassword: string) : string
+>> plaintextPassword: a password.
+>>
+>> returns hashedPassword: sha1 hash of the corresponding password.
+>
+> This will hash the password for you so you can use the loginHashed method with it.
+
 #### *async* hubLogin(hubId: string, hubToken: string) : Promise\<HubLoginData> 
 >> hubId: cloudId of the hub
 >>
