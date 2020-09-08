@@ -2,11 +2,12 @@
 export class CacheStorage {
 
   downloadedAll = { spheres: false, crownstones: false, locations: false }
-  downloadedAllInSphere: { [sphereId: string] : {crownstones: boolean, locations: boolean, users: boolean }} = {}
+  downloadedAllInSphere: { [sphereId: string] : {crownstones?: boolean, locations?: boolean, users?: boolean }} = {}
 
   spheres:      { [sphereId: string]   : cloud_Sphere   } = {};
   crownstones:  { [stoneId: string]    : cloud_Stone    } = {};
   locations:    { [locationId: string] : cloud_Location } = {};
+  sphereUsers:  { [sphereId: string]   : cloud_sphereUserDataSet } = {};
   users:        { [userId: string]     : cloud_User     } = {};
   keys:           cloud_Keys[] = null;
   hubs:         { [hubId: string]      : cloud_Hub      } = {};

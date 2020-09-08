@@ -16,6 +16,22 @@ export class SphereRequests extends RequestorBase {
     return body as any;
   }
 
+  async getUsers(sphereId) : Promise<cloud_sphereUserDataSet> {
+    const {body} = await req("GET",`${this.endpoint}Spheres/${sphereId}/users`, this.addSecurity({ responseType: 'json' }));
+
+    if (!this.cache.downloadedAllInSphere[sphereId]) {
+      this.cache.downloadedAllInSphere[sphereId] = {};
+    }
+    this.cache.downloadedAllInSphere[sphereId].users = true;
+
+    return body as any;
+  }
+
+  async getSphereAuthorizationTokens(sphereId) : Promise<cloud_SphereAuthorizationTokens> {
+    const {body} = await req("GET",`${this.endpoint}Spheres/${sphereId}/tokenData`, this.addSecurity({ responseType: 'json' }));
+    return body as any;
+  }
+
   async getHubSphere() : Promise<cloud_Sphere> {
     if (this.tokenStore.cloudHub.hubId    === undefined) { throw "No Hub loaded."; }
     let sphereId = undefined;
@@ -24,6 +40,8 @@ export class SphereRequests extends RequestorBase {
       let hubData = body as any;
       this.cache.hubs[hubData.id] = hubData;
       sphereId = hubData.sphereId;
+
+      this.tokenStore.cloudHub.sphereId = sphereId;
     }
     return this.getSphere(sphereId);
   }

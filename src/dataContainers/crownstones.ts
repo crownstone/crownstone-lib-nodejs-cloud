@@ -230,10 +230,10 @@ export class Crownstones {
   }
 
   _getFilteredData() : cloud_Stone[] {
-    let sphereIds = this.spheres?.sphereIds || [];
+    let sphereIds   = this.spheres?.sphereIds     || [];
     let locationIds = this.locations?.locationIds || [];
 
-    let itemsInCache =  listCacheItemsInSphereInLocation(this.rest.cache.crownstones, sphereIds, locationIds, this.stoneIds);
+    let itemsInCache = listCacheItemsInSphereInLocation(this.rest.cache.crownstones, sphereIds, locationIds, this.stoneIds);
     this.stoneIds = [];
     for (let i = 0; i < itemsInCache.length; i++) {
       this.stoneIds.push(itemsInCache[i].id)

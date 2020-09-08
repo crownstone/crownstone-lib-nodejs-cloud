@@ -4,6 +4,7 @@ import {Spheres} from "./dataContainers/Spheres";
 import {Locations} from "./dataContainers/locations";
 import {Crownstones} from "./dataContainers/crownstones";
 import {User} from "./dataContainers/user";
+import {Sphere} from "./dataContainers/sphere";
 const crypto = require('crypto');
 const shasum = crypto.createHash('sha1');
 
@@ -51,6 +52,14 @@ export class CrownstoneCloud {
 
   spheres(filter : filter = null) : Spheres {
     return new Spheres(this.rest, filter)
+  }
+
+  sphere(filter : filter) : Sphere {
+    return new Sphere(this.rest, filter)
+  }
+
+  sphereById(id: string) : Sphere {
+    return new Sphere(this.rest, null, id);
   }
 
   locations(filter: filter = null) : Locations {

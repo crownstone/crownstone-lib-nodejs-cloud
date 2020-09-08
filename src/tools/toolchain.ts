@@ -27,6 +27,9 @@ export class Toolchain {
     this.tokenStore.cloudHub.hubId       = hubId;
     this.tokenStore.cloudHub.hubToken    = hubToken;
   }
+  loadHubSphereId(sphereId: string) {
+    this.tokenStore.cloudHub.sphereId = sphereId;
+  }
 
   getCloudRequestor(customEndpoint?: string) : CloudRequestorInterface {
     return new CloudRequestor(this.tokenStore, this.cache, customEndpoint).interface()

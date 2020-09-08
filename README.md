@@ -163,6 +163,30 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 >
 > You use this method to filter subsequent locations and/or Crownstones, or if you want to get data related to the sphere(s). This does not request anything from the cloud by itself.
 
+#### sphere(filter : filter) : Sphere 
+>> filter: You must provide a filter to find a single sphere within of all your spheres. This filter can be it's name, short-uid or cloud id. 
+>> All integrations must only use cloud id as filters, since the other properties are either user-changable or not unique.
+>>
+>> returns Sphere: Same as the Spheres object, except it will only affect a single sphere. It also provides the users() and authorizationTokens() methods.
+>
+> You use this method to filter subsequent locations and/or Crownstones, or if you want to get data related to the sphere(s). This does not request anything from the cloud by itself.
+
+
+#### sphereById(id: string) : Sphere 
+>> id: If you know the sphereId beforehand, using this method gets you a Sphere object without the additional call to search for it in the cloud.
+>>
+>> returns Sphere: Same as sphere above.
+
+
+#### sphere(filter : filter = null) : Sphere 
+>> filter: You can optionally provide a filter to get a subset of all your spheres. This filter can be it's name, short-uid or cloud id. 
+>> All integrations must only use cloud id as filters, since the other properties are either user-changable or not unique.
+>>
+>> returns Spheres: This is the startingpoint from which you can continue filtering, or get data related to spheres.
+>
+> You use this method to filter subsequent locations and/or Crownstones, or if you want to get data related to the sphere(s). This does not request anything from the cloud by itself.
+
+
 #### locations(filter: filter = null) : Locations 
 >> filter: You can optionally provide a filter to get a subset of all your locations (ie. rooms). This filter can be it's name, short-uid or cloud id. 
 >> All integrations must only use cloud id as filters, since the other properties are either user-changable or not unique.
@@ -200,16 +224,17 @@ let csDataInSphere1Kitchen = cloud.spheres('sphere1').locations('kitchen').crown
 > Use this to get the user object, from which you can get you userId, userData and location.
 
 
+
 ### Spheres
 This class is not meant to be created directly, you get this from the CrownstoneCloud. If you have received this class using a filter,
  this class represents all spheres that have been filtered, and all subsequent items called on this object will also belong to these spheres.
 
-#### *async* data() : Promise<cloud_Sphere[]>
+#### *async* data() : Promise\<cloud_Sphere[]>
 >> returns cloud_Sphere[]: JSON containing the data for all spheres that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
 >
 > This method will get the sphere data from the cloud. If it has been obtained once, it will be cached and returned directly the next time this method is called.
 
-#### *async* refresh() : Promise<self>
+#### *async* refresh() : Promise\<self>
 >> returns Spheres. This is the same class as this method was called upon so you can chain after it. 
 >
 > This method will refresh the cache of data for this sphere collection. This does not include all items downstream, like locations and Crownstones. Just the Sphere Data.
@@ -237,16 +262,41 @@ This class is not meant to be created directly, you get this from the Crownstone
 > You use this method as a startingpoint to get data related to the Crownstone(s) or if you want to switch them. This does not request anything from the cloud by itself.
 
 
+
+### Sphere
+
+The Sphere object has all the methods of the Spheres object. Their datatypes are also the same.
+
+#### users() : SphereUsers 
+>> returns SphereUsers: This object allows you to get data related to the users in this sphere..
+>
+> You use this method as a startingpoint to get data related to the users in the sphere.
+
+#### *async* authorizationTokens() : Promise\<cloud_SphereAuthorizationTokens> 
+>> returns cloud_SphereAuthorizationTokens: SON containing the data for all locations that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
+>
+> Used for hubs to get the tokens identifying users.
+
+
+### SphereUsers
+
+#### *async* data() : Promise\<cloud_sphereUserDataSet[]>
+>> returns cloud_sphereUserDataSet[]: JSON containing the data for all users in the Sphere. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
+>
+> This method will get data from the users in the Sphere. If it has been obtained once, it will be cached and returned directly the next time this method is called.
+
+
+
 ### Locations
 This class is not meant to be created directly, you get this from the CrownstoneCloud or via the Spheres. If you have received this class using a filter,
  this class represents all locations that have been filtered, and all subsequent items called on this object will also belong to these locations.
  
- #### *async* data() : Promise<cloud_Location[]>
+ #### *async* data() : Promise\<cloud_Location[]>
  >> returns cloud_Location[]: JSON containing the data for all locations that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
  >
  > This method will get the location data from the cloud. If it has been obtained once, it will be cached and returned directly the next time this method is called.
  
- #### *async* refresh() : Promise<self>
+ #### *async* refresh() : Promise\<self>
  >> returns Locations. This is the same class as this method was called upon so you can chain after it. 
  >
  > This method will refresh the cache of data for this location collection. This does not include all items downstream like the Crownstones. Just the Location Data.
@@ -264,22 +314,22 @@ This class is not meant to be created directly, you get this from the Crownstone
 This class is not meant to be created directly, you get this from the CrownstoneCloud or via the Spheres. If you have received this class using a filter,
  this class represents all locations that have been filtered, and all subsequent items called on this object will also belong to these locations.
  
- #### *async* data() : Promise<cloud_Stone[]>
+ #### *async* data() : Promise\<cloud_Stone[]>
  >> returns cloud_Stone[]: JSON containing the data for all locations that match the filter. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts) 
  >
  > This method will get the Crownstone data from the cloud. If it has been obtained once, it will be cached and returned directly the next time this method is called.
  
- #### *async* refresh() : Promise<self>
+ #### *async* refresh() : Promise\<self>
  >> returns Crownstones. This is the same class as this method was called upon so you can chain after it. 
  >
  > This method will refresh the cache of data for this Crownstone collection.
 
-#### *async* currentSwitchState() : Promise<number> 
+#### *async* currentSwitchState() : Promise\<number> 
 >> returns the current switchstate between 0 and 100.
 >
 >This assumes that there is only one Crownstone selected by the filter or that it came from crownstoneById. If not, an error will be thrown.
 
-#### *async* currentSwitchStateData() : Promise<{[stoneId: string]: cloud_SwitchState}> 
+#### *async* currentSwitchStateData() : Promise\<{[stoneId: string]: cloud_SwitchState}> 
 >> returns the current switchstate for all Crownstones matching the filter conditions.  cloud_Switchstate: { timestamp: string, switchState: number } where switchState is between 0 and 100.
 >
 >You can use this to get the current switchstate for a collection of Crownstones.

@@ -1,4 +1,4 @@
-import {listCache} from "../tools/cache";
+import {listCache, listCacheItems} from "../tools/cache";
 import {CloudRequestorInterface} from "../tools/requestors";
 import {Crownstones} from "./crownstones";
 import {Locations} from "./locations";
@@ -10,9 +10,10 @@ export class Spheres {
   filter = null;
   sphereIds = [];
 
-  constructor(cloudRequestor: CloudRequestorInterface, filter: filter = null) {
+  constructor(cloudRequestor: CloudRequestorInterface, filter: filter = null, id = null) {
     this.rest = cloudRequestor;
     this.filter = filter;
+    if (id) { this.sphereIds = [id]; }
   }
 
 
@@ -80,10 +81,6 @@ export class Spheres {
     return new Locations(this.rest, this, filter);
   }
 
-  users() {
-
-  }
-
   async keys() : Promise<cloud_Keys[]> {
     let keys : cloud_Keys[] = [];
     if (this.rest.cache.keys !== null) {
@@ -113,12 +110,13 @@ export class Spheres {
 
   async data() : Promise<cloud_Sphere[]> {
     // if we have a filter and resolved sphereIds, we should also have the spheres in cache.
-    if (this.filter !== null && this.sphereIds.length > 0) {
-      let result = [];
-      this.sphereIds.forEach((sphereId) => {
-        result.push(this.rest.cache.spheres[sphereId]);
-      })
-      return result;
+    if (this.sphereIds.length > 0) {
+      let items = listCacheItems(this.rest.cache.spheres, this.sphereIds);
+      if (items.length === 0) {
+        await this.downloadAllSpheres();
+        items = listCacheItems(this.rest.cache.spheres, this.sphereIds);
+      }
+      return items;
     }
     // we do not have resolved the filter to sphere ids yet, do that first and retry
     else if (this.filter !== null && this.sphereIds.length === 0) {

@@ -7,7 +7,7 @@ interface cloud_UserData {
   language: "en_us" | "nl_nl",
   email: string,
 
-  profilePicId: string,
+  profilePicId?: string,
   createdAt: string,
   updatedAt: string,
 }
@@ -161,6 +161,9 @@ interface cloud_SwitchState {
   timestamp: string,
   switchState: number
 }
+interface cloud_SphereAuthorizationTokens {
+  [userId: string]: string,
+}
 
 interface cloud_UserLocation {
   deviceId: string,
@@ -177,4 +180,10 @@ interface inSphereLocation {
 interface inSphereLocationData {
   locationId: string,
   locationName: string
+}
+
+interface cloud_sphereUserDataSet {
+  admins:  cloud_UserData[],
+  members: cloud_UserData[],
+  guests:  cloud_UserData[],
 }
