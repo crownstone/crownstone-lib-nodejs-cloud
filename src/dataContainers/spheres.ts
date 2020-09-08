@@ -72,12 +72,12 @@ export class Spheres {
     throw { code: 404, type:"spheres", message: "Could not find Spheres(s) with this filter: " + this.filter};
   }
 
-  crownstones(filter: filter) : Crownstones {
+  crownstones(filter: filter = null) : Crownstones {
     return new Crownstones(this.rest, this, null, filter);
   }
 
 
-  locations(filter: filter) : Locations {
+  locations(filter: filter = null) : Locations {
     return new Locations(this.rest, this, filter);
   }
 

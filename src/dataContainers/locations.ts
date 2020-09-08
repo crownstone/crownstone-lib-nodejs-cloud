@@ -128,7 +128,7 @@ export class Locations {
   }
 
 
-  crownstones(filter: filter) : Crownstones {
+  crownstones(filter: filter = null) : Crownstones {
     return new Crownstones(this.rest, this.spheres, this, filter);
   }
 
