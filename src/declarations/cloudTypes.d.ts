@@ -73,11 +73,12 @@ interface cloud_Stone {
   applianceId: string;
   currentSwitchState?: cloud_SwitchState,
   currentSwitchStateId: string;
-  abilities?: Ability[];
+  abilities?: cloud_Ability[];
 }
 
 
-interface Ability {
+
+interface cloud_Ability {
   type: 'dimming' | 'switchcraft' | 'tapToToggle';
   enabled: boolean;
   syncedToCrownstone: boolean;
