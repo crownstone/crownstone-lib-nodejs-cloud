@@ -1,10 +1,9 @@
 import {Toolchain} from "./tools/toolchain";
 import {CloudRequestorInterface} from "./tools/requestors";
-import {Spheres} from "./dataContainers/Spheres";
-import {Locations} from "./dataContainers/locations";
-import {Crownstones} from "./dataContainers/crownstones";
 import {User} from "./dataContainers/user";
 import {Sphere} from "./dataContainers/sphere";
+import {Location} from "./dataContainers/Location";
+import {Crownstone} from "./dataContainers/crownstone";
 const crypto = require('crypto');
 const shasum = crypto.createHash('sha1');
 
@@ -50,30 +49,23 @@ export class CrownstoneCloud {
     this.toolchain.loadAccessToken(accessToken, userId);
   }
 
-  spheres(filter : filter = null) : Spheres {
-    return new Spheres(this.rest, filter)
+  async spheres() : Promise<cloud_Sphere[]> {
+    let spheres = [];
+    if (this.rest.isUser()) {
+      spheres = await this.rest.getSpheres()
+    } else if (this.rest.isHub()) {
+      spheres = [await this.rest.getHubSphere()];
+    }
+    return spheres;
+  }
+  async locations() : Promise<cloud_Location[]> {
+    return await this.rest.getLocations();
   }
 
-  sphere(filter : filter) : Sphere {
-    return new Sphere(this.rest, filter)
+  async crownstones() : Promise<cloud_Stone[]> {
+    return await this.rest.getCrownstones();
   }
 
-  sphereById(id: string) : Sphere {
-    return new Sphere(this.rest, null, id);
-  }
-
-  locations(filter: filter = null) : Locations {
-    return new Locations(this.rest, null, filter);
-  }
-
-  crownstones(filter: filter = null) : Crownstones {
-    return new Crownstones(this.rest, null, null, filter);
-  }
-
-  crownstoneById(id: string) : Crownstones {
-    let cs = new Crownstones(this.rest, null, null, id);
-    return cs.id(id);
-  }
 
   async keys() : Promise<cloud_Keys[]> {
     if (this.toolchain.cache.keys !== null) {
@@ -84,32 +76,22 @@ export class CrownstoneCloud {
     }
   }
 
+  sphere(id: string) : Sphere {
+    if (!id) { throw new Error("Sphere ID is mandatory!"); }
+    return new Sphere(this.rest, id);
+  }
+
+  location(id: string) : Location {
+    if (!id) { throw new Error("Location ID is mandatory!"); }
+    return new Location(this.rest, id);
+  }
+
+  crownstone(id: string) : Crownstone {
+    if (!id) { throw new Error("Crownstone ID is mandatory!"); }
+    return new Crownstone(this.rest, id);
+  }
+
   me() : User {
     return new User(this.rest);
   }
 }
-
-/**
- spheres
- - crownstones
- - locations
- - users
-A - keys()
-A - data()
-
-
- crownstones
-A - data
-A - turnOn
-A - turnOff
-A - switch(number)
-A - canDim()
-A - isLocked()
-
- locations
- A - data
-
- users
- A - data
-
- */

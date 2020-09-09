@@ -12,8 +12,9 @@ async function run() {
 
   let allKeys = await cloud.keys();
 
-  // you can call keys on a sphere object too. Filtering can be done by name, or short-uid, but preferably should be done by id.
-  let keysInOffice = await cloud.spheres('office').keys();
+  // you can call keys on a sphere object too. Select the sphere by its ID
+  let sphereId = '5f3ea7fdd2eabaa437fdd2e6';
+  let keysInSphere = await cloud.sphere(sphereId).keys();
 
 }
 run().catch((e) => { console.log("There was a problem running this example:", e); });

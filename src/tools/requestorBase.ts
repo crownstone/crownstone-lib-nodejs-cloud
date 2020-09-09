@@ -5,11 +5,9 @@ export class RequestorBase {
   endpoint : string;
 
   tokenStore : TokenStore;
-  cache      : CacheStorage;
 
   constructor(tokenStore: TokenStore, cache: CacheStorage) {
     this.tokenStore = tokenStore;
-    this.cache      = cache;
   }
 
   setEndpoint(endpoint: string) {

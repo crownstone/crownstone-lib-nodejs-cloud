@@ -7,7 +7,7 @@ export class SphereRequests extends RequestorBase {
   async getSpheres() : Promise<cloud_Sphere[]> {
     const {body} = await req("GET",`${this.endpoint}users/${this.tokenStore.cloudUser.userId}/spheres`, this.addSecurity({responseType: 'json' }));
 
-    this.cache.downloadedAll['spheres'] = true;
+    // this.cache.downloadedAll['spheres'] = true;
     return body as any;
   }
 
@@ -19,10 +19,10 @@ export class SphereRequests extends RequestorBase {
   async getUsers(sphereId) : Promise<cloud_sphereUserDataSet> {
     const {body} = await req("GET",`${this.endpoint}Spheres/${sphereId}/users`, this.addSecurity({ responseType: 'json' }));
 
-    if (!this.cache.downloadedAllInSphere[sphereId]) {
-      this.cache.downloadedAllInSphere[sphereId] = {};
-    }
-    this.cache.downloadedAllInSphere[sphereId].users = true;
+    // if (!this.cache.downloadedAllInSphere[sphereId]) {
+    //   this.cache.downloadedAllInSphere[sphereId] = {};
+    // }
+    // this.cache.downloadedAllInSphere[sphereId].users = true;
 
     return body as any;
   }
@@ -38,7 +38,7 @@ export class SphereRequests extends RequestorBase {
     if (this.tokenStore.cloudHub.sphereId === undefined) {
       let {body} = await req("GET",`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ responseType: 'json' }));
       let hubData = body as any;
-      this.cache.hubs[hubData.id] = hubData;
+      // this.cache.hubs[hubData.id] = hubData;
       sphereId = hubData.sphereId;
 
       this.tokenStore.cloudHub.sphereId = sphereId;

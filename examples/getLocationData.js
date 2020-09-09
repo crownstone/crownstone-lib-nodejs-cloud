@@ -12,20 +12,12 @@ let cloud = new cloudLib.CrownstoneCloud();
 async function run() {
   await cloud.login('crownstoneEmail', 'crownstonePassword')
 
-  // we can get all crownstones that we have access to:
-  let alllocationData = await cloud.locations().data();
+  // we can get all locations that we have access to:
+  let alllocationData = await cloud.locations();
 
-  // you can also get all crownstones in a certain room, again the filter can be name, short-uid or id.
-  let roomFilter = 'kitchen';
-  let locationDataInRoom = await cloud.locations(roomFilter).data();
-
-  // since you might have a kitchen in sphere1 and a kitchen in sphere2, you can also first select the sphere
-  let locationDataInSphere1Kitchen = await cloud.spheres('sphere1').locations(roomFilter).data();
-
-  // whenever possible, we cache your previous results in the cloud instance so you can access them quickly.
-  // If you want to get new data, use the refresh method;
-  let location = cloud.spheres('sphere1').locations(roomFilter);
-  let newData = await location.refresh().data()
+  // you can also get the data of a specific location. get the location by its ID
+  let locationId = '5f3ea7fdd2ef3bb3245ac2e6';
+  let specificLocationData = await cloud.location(locationId).data();
 }
 run().catch((e) => { console.log("There was a problem running this example:", e); });
 

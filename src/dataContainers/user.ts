@@ -10,22 +10,16 @@ export class User {
   }
 
   async data() : Promise<cloud_UserData> {
-    if (this.rest.cache.user === null) {
-      await this.rest.getUserData()
-      return this.data();
-    }
-    else {
-      return this.rest.cache.user;
-    }
+    return this.rest.getUserData()
   }
 
   async id() : Promise<string> {
-    if (this.rest.cache.user === null && !this.rest.tokenStore.cloudUser.userId) {
+    if (!this.rest.tokenStore.cloudUser.userId) {
       await this.rest.getUserId();
       return this.id();
     }
     else {
-      return this.rest.tokenStore.cloudUser.userId || this.rest.cache.user.id;
+      return this.rest.tokenStore.cloudUser.userId;
     }
   }
 

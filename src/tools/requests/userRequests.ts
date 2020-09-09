@@ -27,7 +27,7 @@ export class UserRequests extends RequestorBase {
   async getUserData() : Promise<cloud_UserData> {
     const {body} = await req("GET",`${this.endpoint}users/me`,  this.addSecurity({ responseType: 'json' }));
     let userData = body as any;
-    this.cache.user = userData;
+    // this.cache.user = userData;
     return userData;
   }
 

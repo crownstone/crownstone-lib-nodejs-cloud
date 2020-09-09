@@ -1,70 +1,46 @@
 import {CloudRequestorInterface} from "../tools/requestors";
-import {Spheres} from "./spheres";
-import {SphereUsers} from "./sphereUsers";
 
-
-export class Sphere extends Spheres {
+export class Sphere {
 
   rest: CloudRequestorInterface;
-  filter = null;
   sphereId = null;
 
-  constructor(cloudRequestor: CloudRequestorInterface, filter: filter = null, id = null) {
-    super(cloudRequestor, filter, id);
+  constructor(cloudRequestor: CloudRequestorInterface, id = null) {
     this.rest = cloudRequestor;
-    this.filter = filter;
-    if (id) { this.sphereId = id; }
+    this.sphereId = id;
   }
 
-  async resolveIdentifier() : Promise<void> {
-    await super.resolveIdentifier();
-    console.log(this.sphereIds)
-    if (this.sphereIds.length > 1) {
-      throw "Too many spheres fit this filter. Be more specific."
-    }
-    if (this.sphereIds.length === 1) {
-      this.sphereId = this.sphereIds[0];
-    }
-    else {
-      this.sphereId = null;
-    }
-  }
-
-  users() : SphereUsers {
-    return new SphereUsers(this.rest, this);
+  async users() : Promise<cloud_sphereUserDataSet>{
+    return await this.rest.getUsers(this.sphereId);
   }
 
   async authorizationTokens() : Promise<cloud_SphereAuthorizationTokens> {
-    if (this.sphereIds.length == 0) {
-      await this.resolveIdentifier();
-      return this.authorizationTokens()
-    }
-    else if (this.sphereIds.length !== 1) {
-      throw "You can only get tokens for a single Sphere.";
-    }
-    return await this.rest.getSphereAuthorizationTokens(this.sphereIds[0]);
+    return await this.rest.getSphereAuthorizationTokens(this.sphereId);
   }
 
-  async downloadSphere(): Promise<cloud_Sphere> {
-    let sphere;
-    if (this.rest.isUser()) {
-      sphere = await this.rest.getSphere(this.sphereId)
-    }
-    else if (this.rest.isHub()) {
-      sphere = [await this.rest.getHubSphere()];
-    }
-
-    if (sphere) {
-      this.rest.cache.spheres[sphere.id] = sphere;
-    }
-    return sphere;
+  async crownstones() : Promise<cloud_Stone[]> {
+    return await this.rest.getCrownstonesInSphere(this.sphereId);
   }
 
-  async refresh() {
-    if (this.sphereId === null) {
-      await this.resolveIdentifier()
-    }
-    await this.downloadSphere()
-    return this;
+
+  async locations() : Promise<cloud_Location[]> {
+    return await this.rest.getLocationsInSphere(this.sphereId);
   }
+
+  async keys() : Promise<cloud_Keys | null> {
+    let keys = await this.rest.getKeys()
+
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i].sphereId === this.sphereId) {
+        return keys[i];
+      }
+    }
+
+    return null
+  }
+
+  async data() : Promise<cloud_Sphere> {
+    return this.rest.getSphere(this.sphereId)
+  }
+
 }
