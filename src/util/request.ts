@@ -26,6 +26,21 @@ export async function req(type: requestType, url: string, options) : Promise<any
     return result;
   }
   catch (err) {
+    if (err.response) {
+      // response error
+      let statusCode = err.response.statusCode;
+      let body = err.response.body;
+      let messageInBody = err.response.body?.err?.message;
+      let codeInBody = err.response.body?.err?.code;
+
+      let error = {statusCode, body, message: messageInBody, code: codeInBody};
+      LOG.error("Something went wrong with request", token, error);
+      throw error;
+    }
+    else if (err.request) {
+      // error during request
+
+    }
     LOG.error("Something went wrong with request", token, err);
     throw err;
   }
