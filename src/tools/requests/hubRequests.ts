@@ -12,4 +12,8 @@ export class HubRequests extends RequestorBase {
     });
     return body;
   }
+
+  async hubSetLocalIpAddress(ipaddress) : Promise<void> {
+    await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/localIP`, this.addSecurity({ searchParams: {localIpAddress: ipaddress} }));
+  }
 }

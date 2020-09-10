@@ -22,6 +22,9 @@ export class Crownstone {
   }
 
 
+  async setCurrentSwitchState(switchState) : Promise<void> {
+    await this.rest.setCurrentSwitchState(this.stoneId, switchState);
+  }
 
   async setSwitch(value: number) {
     await this._switch({type:"PERCENTAGE", percentage: value});
