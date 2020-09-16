@@ -17,6 +17,6 @@ interface StoneSwitchData {
   percentage?: number
 }
 
-interface MeasurementData {
+interface EnergyMeasurementData {
   [stoneCloudId: string] : { t: number, energy: number }[]
 }

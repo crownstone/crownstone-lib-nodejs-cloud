@@ -12,8 +12,8 @@ export class Hub {
     return this.rest.hubSetLocalIpAddress(ipAddress)
   }
 
-  async uploadMeasurements(measurementData: MeasurementData) : Promise<void> {
-    return this.rest.uploadMeasurementData(measurementData);
+  async uploadEnergyMeasurements(measurementData: EnergyMeasurementData) : Promise<void> {
+    return this.rest.uploadEnergyMeasurementData(measurementData);
   }
 
 }
