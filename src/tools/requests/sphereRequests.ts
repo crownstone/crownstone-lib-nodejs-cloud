@@ -32,18 +32,30 @@ export class SphereRequests extends RequestorBase {
     return body as any;
   }
 
-  async getHubSphere() : Promise<cloud_Sphere> {
+  async getHubSphereId() : Promise<string> {
     if (this.tokenStore.cloudHub.hubId    === undefined) { throw "No Hub loaded."; }
-    let sphereId = undefined;
     if (this.tokenStore.cloudHub.sphereId === undefined) {
       let {body} = await req("GET",`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ responseType: 'json' }));
       let hubData = body as any;
       // this.cache.hubs[hubData.id] = hubData;
-      sphereId = hubData.sphereId;
-
+      let sphereId = hubData.sphereId;
       this.tokenStore.cloudHub.sphereId = sphereId;
+      return sphereId;
     }
-    return this.getSphere(sphereId);
+    else {
+      return this.tokenStore.cloudHub.sphereId;
+    }
+  }
+  async getHubSphere() : Promise<cloud_Sphere> {
+    let sphereId = await this.getHubSphereId()
+    return await this.getSphere(sphereId);
+  }
+
+  async uploadMeasurementData(measurementData: MeasurementData) : Promise<void> {
+    if (this.tokenStore.cloudHub.sphereId === undefined) {
+      await this.getHubSphereId();
+    }
+    await req("POST",`${this.endpoint}Spheres/${this.tokenStore.cloudHub.sphereId}/measurements`, this.addSecurity({ json: measurementData }));
   }
 
 }

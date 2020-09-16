@@ -16,3 +16,7 @@ interface StoneSwitchData {
   type: 'PERCENTAGE' | 'TURN_ON' | 'TURN_OFF',
   percentage?: number
 }
+
+interface MeasurementData {
+  [stoneCloudId: string] : { t: number, energy: number }[]
+}

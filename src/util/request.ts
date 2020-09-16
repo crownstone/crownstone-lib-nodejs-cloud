@@ -1,5 +1,6 @@
 import got from "got";
 const LOG = require('debug-level')('crownstone-cloud-requests')
+const verboseLOG = require('debug-level')('crownstone-verbose-cloud-requests')
 
 type requestType = "POST" | "GET" | "DELETE" | "PUT" | "PATCH"
 
@@ -22,7 +23,7 @@ export async function req(type: requestType, url: string, options) : Promise<any
       case "PATCH":
         result = await got.patch(url, options); break;
     }
-    LOG.debug("Request result", result, token)
+    verboseLOG.debug("Request result", result, token)
     return result;
   }
   catch (err) {

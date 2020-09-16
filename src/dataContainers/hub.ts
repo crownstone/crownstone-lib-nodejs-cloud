@@ -1,6 +1,5 @@
 import {CloudRequestorInterface} from "../tools/requestors";
 
-
 export class Hub {
 
   rest: CloudRequestorInterface;
@@ -11,6 +10,10 @@ export class Hub {
 
   async setLocalIpAddress(ipAddress) : Promise<void> {
     return this.rest.hubSetLocalIpAddress(ipAddress)
+  }
+
+  async uploadMeasurements(measurementData: MeasurementData) : Promise<void> {
+    return this.rest.uploadMeasurementData(measurementData);
   }
 
 }
