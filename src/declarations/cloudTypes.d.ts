@@ -163,7 +163,7 @@ interface cloud_SwitchState {
   switchState: number
 }
 interface cloud_SphereAuthorizationTokens {
-  [userId: string]: string,
+  [userId: string]: { role: string, token: string },
 }
 
 interface cloud_UserLocation {
