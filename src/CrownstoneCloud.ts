@@ -6,7 +6,6 @@ import {Location} from "./dataContainers/Location";
 import {Crownstone} from "./dataContainers/crownstone";
 import {Hub} from "./dataContainers/hub";
 const crypto = require('crypto');
-const shasum = crypto.createHash('sha1');
 
 
 export class CrownstoneCloud {
@@ -41,6 +40,7 @@ export class CrownstoneCloud {
   }
 
   hashPassword(plaintextPassword: string) : string {
+    let shasum = crypto.createHash('sha1');
     shasum.update(String(plaintextPassword));
     let hashedPassword = shasum.digest('hex');
     return hashedPassword;
