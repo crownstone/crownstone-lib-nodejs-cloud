@@ -1,9 +1,8 @@
 import got from "got";
-const LOG = require('debug-level')('crownstone-cloud-requests')
-const verboseLOG = require('debug-level')('crownstone-verbose-cloud-requests')
+import {Logger} from "../Logger";
 
 type requestType = "POST" | "GET" | "DELETE" | "PUT" | "PATCH"
-
+const log = Logger(__filename);
 
 
 export async function req(type: requestType, url: string, options) : Promise<any> {
@@ -23,7 +22,7 @@ export async function req(type: requestType, url: string, options) : Promise<any
       case "PATCH":
         result = await got.patch(url, options); break;
     }
-    verboseLOG.debug("Request result", result, token)
+    log.debug("Request result", result, token)
     return result;
   }
   catch (err) {
@@ -35,14 +34,14 @@ export async function req(type: requestType, url: string, options) : Promise<any
       let codeInBody = err.response.body?.err?.code;
 
       let error = {statusCode, body, message: messageInBody, code: codeInBody};
-      LOG.error("Something went wrong with request", token, error);
+      log.error("Something went wrong with request", token, error);
       throw error;
     }
     else if (err.request) {
       // error during request
 
     }
-    LOG.error("Something went wrong with request", token, err);
+    log.error("Something went wrong with request", token, err);
     throw err;
   }
 }
@@ -54,5 +53,5 @@ function logRequest(type: requestType, url: string, options, token: string) {
   let bodyParams = options.json || null;
   let responseType = options.responseType;
 
-  LOG.info("sending", type, "request to", url, 'headers:', headers, 'queryParams:', queryParams, 'bodyParams:', bodyParams, 'responseType', responseType, token);
+  log.info("sending", type, "request to", url, 'headers:', headers, 'queryParams:', queryParams, 'bodyParams:', bodyParams, 'responseType', responseType, token);
 }

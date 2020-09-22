@@ -2,10 +2,11 @@ import {Util} from "../util/Util";
 
 import { prepareEndpointAndBody } from './cloudUtil'
 import { defaultHeaders } from './sections/cloudApiBase'
-const LOG = require('debug-level')('crownstone-rest-core')
 import fetch from 'cross-fetch';
 import {CLOUD_ADDRESS} from "../config";
+import {Logger} from "../Logger";
 
+const log = Logger(__filename);
 /**
  *
  * This method communicates with the rest services.
@@ -72,7 +73,7 @@ export function request(
     url = CLOUD_ADDRESS + endPoint;
   }
 
-  LOG.info(method,"requesting from URL:", url, "config:", requestConfig, logToken);
+  log.info(method,"requesting from URL:", url, "config:", requestConfig, logToken);
 
   // the actual request
   return new Promise((resolve, reject) => {
@@ -105,10 +106,10 @@ export function request(
       })
       .then((parsedResponse) => {
         if (stopRequest === false) {
-          if (STATUS >= 400) { LOG.warn("REPLY from", endPoint, " failed", STATUS, logToken); }
-          else               { LOG.info("REPLY from", endPoint, " SUCCESSFUL", STATUS, logToken); }
+          if (STATUS >= 400) { log.warn("REPLY from", endPoint, " failed", STATUS, logToken); }
+          else               { log.info("REPLY from", endPoint, " SUCCESSFUL", STATUS, logToken); }
 
-          LOG.debug("REPLY from", endPoint, " with options: ", requestConfig, " is: ", {status: STATUS, data: parsedResponse}, logToken);
+          log.debug("REPLY from", endPoint, " with options: ", requestConfig, " is: ", {status: STATUS, data: parsedResponse}, logToken);
           finishedRequest = true;
           resolve({status: STATUS, data: parsedResponse});
         }

@@ -1,5 +1,5 @@
 import {request} from '../cloudCore'
-const LOG = require('debug-level')('crownstone-rest-api-base')
+import {Logger} from "../../Logger";
 
 export const defaultHeaders = {
 'Accept': 'application/json',
@@ -11,7 +11,7 @@ export const uploadHeaders = {
   'Content-Type': 'multipart/form-data',
 };
 
-
+const log = Logger(__filename);
 
 interface requestOptions {
   data?: any,
@@ -124,7 +124,7 @@ export const cloudApiBase : cloudApiBase_cloudModule = {
         promise = cloudApiBase._head(promiseBody);
         break;
       default:
-        LOG.error("UNKNOWN TYPE:", reqType);
+        log.error("UNKNOWN TYPE:", reqType);
         return;
     }
     return cloudApiBase._finalizeRequest(promise, options, endpoint, promiseBody);
@@ -154,7 +154,7 @@ export const cloudApiBase : cloudApiBase_cloudModule = {
   setNetworkErrorHandler: function(handler)     : any  { this._networkErrorHandler = handler },
 
   __debugReject: function(reply, reject, debugOptions) {
-    LOG.error("ERROR: HTML ERROR IN API:", reply, debugOptions);
+    log.error("ERROR: HTML ERROR IN API:", reply, debugOptions);
     reject(reply);
   }
 };
