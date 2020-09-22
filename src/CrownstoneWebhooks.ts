@@ -1,7 +1,11 @@
 import { Toolchain }                 from "./tools/toolchain";
 import { WebhookRequestorInterface } from "./tools/requestors";
+import {Logger} from "./Logger";
+
+const log = Logger(__filename);
 
 export class CrownstoneWebhooks {
+  log = log;
 
   toolchain : Toolchain;
   rest: WebhookRequestorInterface;

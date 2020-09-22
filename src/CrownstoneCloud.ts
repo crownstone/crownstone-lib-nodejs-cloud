@@ -5,10 +5,12 @@ import {Sphere} from "./dataContainers/sphere";
 import {Location} from "./dataContainers/Location";
 import {Crownstone} from "./dataContainers/crownstone";
 import {Hub} from "./dataContainers/hub";
+import {Logger} from "./Logger";
 const crypto = require('crypto');
-
+const log = Logger(__filename);
 
 export class CrownstoneCloud {
+  log = log;
 
   toolchain : Toolchain;
   rest: CloudRequestorInterface;
