@@ -22,7 +22,8 @@ export async function req(type: requestType, url: string, options) : Promise<any
       case "PATCH":
         result = await got.patch(url, options); break;
     }
-    log.debug("Request successful", token, result.body);
+    log.debug("Request result:", result.statusCode, result.body, token);
+    log.info("Request successful", result.statusCode, token);
     return result;
   }
   catch (err) {
