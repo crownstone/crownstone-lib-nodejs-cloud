@@ -22,7 +22,7 @@ export async function req(type: requestType, url: string, options) : Promise<any
       case "PATCH":
         result = await got.patch(url, options); break;
     }
-    log.debug("Request result", result, token)
+    log.debug("Request successful", token, result.body);
     return result;
   }
   catch (err) {
