@@ -199,6 +199,10 @@ This class is not meant to be created directly, you get this from the Crownstone
 >
 > Used for hubs to get the tokens identifying users.
 
+#### *async* presentPeople() : Promise\<SpherePresentPeople>
+>> returns SpherePresentPeople: JSON containing the data for the locations of all users in this sphere. [Type definition found here.](https://github.com/crownstone/crownstone-lib-nodejs-cloud/blob/master/src/declarations/cloudTypes.d.ts)
+>
+> Used to get the locations of all users in the sphere
 
 ### Location
 This class is not meant to be created directly, you get this from the CrownstoneCloud. It represents a single location.

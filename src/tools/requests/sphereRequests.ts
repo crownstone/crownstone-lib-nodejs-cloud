@@ -2,6 +2,8 @@ import {RequestorBase} from "../requestorBase";
 import {req} from "../../util/request";
 
 
+let ignoreDeviceId = {searchParams: {ignoreDeviceId: JSON.stringify({})}}
+
 export class SphereRequests extends RequestorBase {
 
   async getSpheres() : Promise<cloud_Sphere[]> {
@@ -49,6 +51,11 @@ export class SphereRequests extends RequestorBase {
   async getHubSphere() : Promise<cloud_Sphere> {
     let sphereId = await this.getHubSphereId()
     return await this.getSphere(sphereId);
+  }
+
+  async getPresentPeople(sphereId) : Promise<SpherePresentPeople> {
+    const {body} = await req("GET",`${this.endpoint}Spheres/${sphereId}/presentPeople`, this.addSecurity({ ...ignoreDeviceId, responseType: 'json' }));
+    return body as any;
   }
 
   async uploadEnergyMeasurementData(energyMeasurementData: EnergyMeasurementData) : Promise<void> {
