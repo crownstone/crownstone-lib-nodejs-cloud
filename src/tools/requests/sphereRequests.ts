@@ -51,7 +51,7 @@ export class SphereRequests extends RequestorBase {
     return await this.getSphere(sphereId);
   }
 
-  async getPresentPeople(sphereId, ignoreDeviceId : string) : Promise<SpherePresentPeople> {
+  async getPresentPeople(sphereId, ignoreDeviceId? : string) : Promise<SpherePresentPeople[]> {
     const {body} = await req("GET",`${this.endpoint}Spheres/${sphereId}/presentPeople`, this.addSecurity({ searchParams: { ignoreDeviceId: ignoreDeviceId }, responseType: 'json' }));
     return body as any;
   }

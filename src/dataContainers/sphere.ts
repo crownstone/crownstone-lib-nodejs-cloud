@@ -43,7 +43,7 @@ export class Sphere {
     return this.rest.getSphere(this.sphereId)
   }
 
-  async presentPeople(ignoreDeviceId : string) : Promise<SpherePresentPeople> {
+  async presentPeople(ignoreDeviceId? : string) : Promise<SpherePresentPeople[]> {
     return this.rest.getPresentPeople(this.sphereId, ignoreDeviceId)
   }
 
