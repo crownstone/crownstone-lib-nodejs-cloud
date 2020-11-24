@@ -22,7 +22,6 @@ export class Sphere {
     return await this.rest.getCrownstonesInSphere(this.sphereId);
   }
 
-
   async locations() : Promise<cloud_Location[]> {
     return await this.rest.getLocationsInSphere(this.sphereId);
   }

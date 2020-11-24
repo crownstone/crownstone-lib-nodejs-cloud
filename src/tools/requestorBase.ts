@@ -23,7 +23,8 @@ export class RequestorBase {
     if (this.tokenStore.accessToken) {
       if (this.tokenStore.accessToken.length > 32) {
         return {...options, headers: {...options.headers, Authorization: this.tokenStore.accessToken}};
-      } else {
+      }
+      else {
         return {...options, searchParams: {...options.searchParams, access_token: this.tokenStore.accessToken}};
       }
     }

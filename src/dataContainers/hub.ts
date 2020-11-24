@@ -8,6 +8,10 @@ export class Hub {
     this.rest = cloudRequestor;
   }
 
+  async data() : Promise<cloud_Hub> {
+    return this.rest.getHub()
+  }
+
   async setLocalIpAddress(ipAddress) : Promise<void> {
     return this.rest.hubSetLocalIpAddress(ipAddress)
   }

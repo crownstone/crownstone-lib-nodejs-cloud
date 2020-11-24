@@ -158,6 +158,17 @@ interface cloud_EventListener {
   ownerId: string,
 }
 
+interface cloud_Hub {
+  id: string,
+  name: string,
+  sphereId: string,
+  localIPAddress: string | null,
+  externalIPAddress: string,
+  lastSeen: string,
+  createdAt: string,
+  updatedAt: string,
+}
+
 interface cloud_SwitchState {
   timestamp: string,
   switchState: number

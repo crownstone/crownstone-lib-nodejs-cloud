@@ -69,7 +69,6 @@ export class CrownstoneCloud {
     return await this.rest.getCrownstones();
   }
 
-
   async keys() : Promise<cloud_Keys[]> {
     if (this.toolchain.cache.keys !== null) {
       return this.toolchain.cache.keys;
@@ -77,6 +76,10 @@ export class CrownstoneCloud {
     else {
       return await this.rest.getKeys()
     }
+  }
+
+  async hubs() : Promise<cloud_Hub[]> {
+    return await this.rest.getHubs();
   }
 
   sphere(id: string) : Sphere {
