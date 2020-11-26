@@ -14,7 +14,7 @@ export class HubRequests extends RequestorBase {
   }
 
   async hubSetLocalIpAddress(ipaddress) : Promise<void> {
-    await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/localIP`, this.addSecurity({ searchParams: {localIpAddress: ipaddress} }));
+    await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/localIP`, this.addSecurity({ searchParams: {localIpAddress: ipaddress}}));
   }
 
   async getHub() : Promise<cloud_Hub> {
@@ -23,7 +23,7 @@ export class HubRequests extends RequestorBase {
   }
 
   async getUartKey(macAddress: string) : Promise<string> {
-    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/uartKey?macAddress=${macAddress.toUpperCase()}`, this.addSecurity({}));
+    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/uartKey?macAddress=${macAddress.toUpperCase()}`, this.addSecurity({responseType: 'json' }));
     return body as string;
   }
 
