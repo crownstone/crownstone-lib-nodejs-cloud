@@ -22,6 +22,11 @@ export class HubRequests extends RequestorBase {
     return body as cloud_Hub;
   }
 
+  async getUartKey(macAddress: string) : Promise<string> {
+    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}?macAddress=${macAddress.toUpperCase()}`, this.addSecurity({}));
+    return body as string;
+  }
+
   async getHubs() : Promise<cloud_Hub[]> {
     const {body} = await req("GET", `${this.endpoint}Hubs/`, this.addSecurity({responseType: 'json' }));
     return body as cloud_Hub[];
