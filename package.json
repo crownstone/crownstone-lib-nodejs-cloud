@@ -1,6 +1,6 @@
 {
   "name": "crownstone-cloud",
-  "version": "0.20.0",
+  "version": "0.22.0",
   "scripts": {
     "start": "tsc -watch",
     "build": "rimraf ./dist && tsc",
