@@ -12,8 +12,12 @@ export class Hub {
     return this.rest.getHub()
   }
 
-  async setLocalIpAddress(ipAddress) : Promise<void> {
+  async setLocalIpAddress(ipAddress: string) : Promise<void> {
     return this.rest.hubSetLocalIpAddress(ipAddress)
+  }
+
+  async getUartKey(macAddress: string) : Promise<string> {
+    return this.rest.getUartKey(macAddress);
   }
 
   async uploadEnergyMeasurements(measurementData: EnergyMeasurementData) : Promise<void> {
