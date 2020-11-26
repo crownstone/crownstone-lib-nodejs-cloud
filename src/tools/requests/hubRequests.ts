@@ -18,12 +18,12 @@ export class HubRequests extends RequestorBase {
   }
 
   async getHub() : Promise<cloud_Hub> {
-    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({}));
+    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({responseType: 'json' }));
     return body as cloud_Hub;
   }
 
   async getHubs() : Promise<cloud_Hub[]> {
-    const {body} = await req("GET", `${this.endpoint}Hubs/`, this.addSecurity({}));
+    const {body} = await req("GET", `${this.endpoint}Hubs/`, this.addSecurity({responseType: 'json' }));
     return body as cloud_Hub[];
   }
 }
