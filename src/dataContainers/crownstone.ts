@@ -51,4 +51,7 @@ export class Crownstone {
     await this.rest.switchCrownstone(this.stoneId, {type: switchData.type, percentage: value})
   }
 
+  async deleteCrownstone() : Promise<Count> {
+    return this.rest.deleteCrownstone(this.stoneId);
+  }
 }

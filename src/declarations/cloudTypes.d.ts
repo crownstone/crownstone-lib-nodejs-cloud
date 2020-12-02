@@ -199,3 +199,8 @@ interface cloud_sphereUserDataSet {
   members: cloud_UserData[],
   guests:  cloud_UserData[],
 }
+
+
+interface Count {
+  count: number
+}

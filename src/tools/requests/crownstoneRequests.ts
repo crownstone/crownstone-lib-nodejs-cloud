@@ -37,5 +37,11 @@ export class CrownstoneRequests extends RequestorBase {
   async setCurrentSwitchState(stoneId, switchState: number) : Promise<void> {
     await req("POST",`${this.endpoint}Stones/${stoneId}/currentSwitchStateV2`, this.addSecurity({ searchParams: { switchState: switchState}, responseType: 'json' }));
   }
+
+
+  async deleteCrownstone(stoneId) : Promise<Count> {
+    const {body} = await req("DELETE",`${this.endpoint}Stones/${stoneId}`, this.addSecurity({ responseType: 'json' }));
+    return body as Count;
+  }
 }
 

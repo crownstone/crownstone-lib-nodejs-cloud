@@ -22,13 +22,18 @@ export class HubRequests extends RequestorBase {
     return body as cloud_Hub;
   }
 
-  async getUartKey(macAddress: string) : Promise<string> {
-    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/uartKey?macAddress=${macAddress.toUpperCase()}`, this.addSecurity({responseType: 'json' }));
+  async getUartKey() : Promise<string> {
+    const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/uartKey`, this.addSecurity({responseType: 'json' }));
     return body as string;
   }
 
   async getHubs() : Promise<cloud_Hub[]> {
     const {body} = await req("GET", `${this.endpoint}Hubs/`, this.addSecurity({responseType: 'json' }));
     return body as cloud_Hub[];
+  }
+
+  async deleteHub() : Promise<Count> {
+    const {body} = await req("DELETE",`${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ responseType: 'json' }));
+    return body as Count;
   }
 }
