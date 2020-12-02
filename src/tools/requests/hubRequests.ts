@@ -18,7 +18,7 @@ export class HubRequests extends RequestorBase {
   }
 
   async updateHub(data: cloud_Hub_settable) : Promise<void> {
-    await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ searchParams: {data: data}}));
+    await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ json: data } ));
   }
 
   async getHub() : Promise<cloud_Hub> {
