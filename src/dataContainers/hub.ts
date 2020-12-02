@@ -20,6 +20,10 @@ export class Hub {
     return this.rest.getUartKey();
   }
 
+  async update(data: cloud_Hub_settable) : Promise<void> {
+    return this.rest.updateHub(data);
+  }
+
   async uploadEnergyMeasurements(measurementData: EnergyMeasurementData) : Promise<void> {
     return this.rest.uploadEnergyMeasurementData(measurementData);
   }

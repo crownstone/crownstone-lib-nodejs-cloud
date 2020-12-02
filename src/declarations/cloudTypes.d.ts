@@ -26,9 +26,18 @@ interface cloud_Hub {
   name: string,
   sphereId: string,
   localIPAddress: string,
+  linkedStoneId: string,
   externalIPAddress: string,
   createdAt: string,
   updatedAt: string,
+}
+
+interface cloud_Hub_settable {
+  name?: string,
+  localIPAddress?: string,
+  linkedStoneId?: string,
+  externalIPAddress?: string,
+  updatedAt?: string,
 }
 
 interface cloud_LoginReply {

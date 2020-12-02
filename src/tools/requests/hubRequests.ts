@@ -17,6 +17,10 @@ export class HubRequests extends RequestorBase {
     await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}/localIP`, this.addSecurity({ searchParams: {localIpAddress: ipaddress}}));
   }
 
+  async updateHub(data: cloud_Hub_settable) : Promise<void> {
+    await req("PUT", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({ searchParams: {data: data}}));
+  }
+
   async getHub() : Promise<cloud_Hub> {
     const {body} = await req("GET", `${this.endpoint}Hubs/${this.tokenStore.cloudHub.hubId}`, this.addSecurity({responseType: 'json' }));
     return body as cloud_Hub;
