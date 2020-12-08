@@ -27,6 +27,7 @@ interface cloud_Hub {
   sphereId: string,
   localIPAddress: string,
   linkedStoneId: string,
+  locationId: string,
   externalIPAddress: string,
   createdAt: string,
   updatedAt: string,
@@ -36,7 +37,7 @@ interface cloud_Hub_settable {
   name?: string,
   localIPAddress?: string,
   linkedStoneId?: string,
-  externalIPAddress?: string,
+  locationId?: string,
   updatedAt?: string,
 }
 
@@ -64,7 +65,6 @@ interface cloud_Stone {
   json: string;
   touchToToggle: boolean;
   tapToToggle: boolean;
-  lastSeenAt: Date;
   firmwareVersion: string;
   bootloaderVersion: string;
   hardwareVersion: string;
@@ -75,8 +75,8 @@ interface cloud_Stone {
   meshDeviceKey: string;
   locationId: string;
   sphereId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   currentPowerUsageId: string;
   currentEnergyUsageId: string;
   applianceId: string;
@@ -131,12 +131,12 @@ interface cloud_Keys {
 }
 
 type keyType = "ADMIN_KEY"            |
-               "MEMBER_KEY"           |
-               "BASIC_KEY"            |
-               "LOCALIZATION_KEY"     |
-               "SERVICE_DATA_KEY"     |
-               "MESH_APPLICATION_KEY" |
-               "MESH_NETWORK_KEY"
+  "MEMBER_KEY"           |
+  "BASIC_KEY"            |
+  "LOCALIZATION_KEY"     |
+  "SERVICE_DATA_KEY"     |
+  "MESH_APPLICATION_KEY" |
+  "MESH_NETWORK_KEY"
 
 
 interface cloud_SphereKey {
@@ -167,16 +167,123 @@ interface cloud_EventListener {
   ownerId: string,
 }
 
-interface cloud_Hub {
+interface cloud_SphereFeature {
   id: string,
+  from: string,
+  until: string,
   name: string,
-  sphereId: string,
-  localIPAddress: string | null,
-  externalIPAddress: string,
-  lastSeen: string,
+  data: string,
+  enabled: boolean,
   createdAt: string,
   updatedAt: string,
 }
+
+interface cloud_Message {
+  id: string,
+  triggerEvent: string;
+  content: string;
+  everyoneInSphere: boolean;
+  everyoneInSphereIncludingOwner: boolean;
+  deliveredAll: boolean;
+  triggerLocationId: string;
+  ownerId: string;
+  recipients: cloud_User[];
+  delivered: cloud_MessageState[];
+  read: cloud_MessageState[];
+  sphereId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+interface cloud_Scene {
+  id: string,
+  name: string;
+  stockPicture: string;
+  customPictureId: string;
+  data: string;
+  sphereId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+
+interface cloud_MessageState {
+  id: string
+  timestamp: string;
+  enabled: string;
+  syncedToCrownstone: string;
+  messageDeliveredId: string;
+  messageReadId: string;
+  userId: string;
+  sphereId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+interface cloud_SphereTrackingNumber {
+  id: string,
+  trackingNumber: number;
+  trackingNumberId: string;
+  trackingNumberType: string;
+  sphereId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+interface cloud_Toon {
+  id: string,
+  toonAgreementId: string;
+  toonAddress: string;
+  refreshToken: string;
+  refreshTokenTTL: number;
+  refreshTokenUpdatedAt: number;
+  refreshTokenUpdatedFrom: number;
+  schedule: string;
+  updatedScheduleTime: number;
+  changedToProgram: string;
+  changedProgramTime: number;
+  sphereId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+interface ActiveDays {
+  Mon: boolean;
+  Tue: boolean;
+  Wed: boolean;
+  Thu: boolean;
+  Fri: boolean;
+  Sat: boolean;
+  Sun: boolean;
+}
+
+interface cloud_Behaviour {
+  id: string,
+  type: string;
+  data: string;
+  syncedToCrownstone: boolean;
+  idOnCrownstone: number;
+  profileIndex: number;
+  deleted: boolean;
+  activeDays: ActiveDays;
+  sphereId: string;
+  stoneId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+interface cloud_AbilityProperty {
+  id: string,
+  type: string;
+  value: string;
+  abilityId: string;
+  sphereId: string;
+  stoneId: string;
+  createdAt: string,
+  updatedAt: string,
+}
+
+
 
 interface cloud_SwitchState {
   timestamp: string,

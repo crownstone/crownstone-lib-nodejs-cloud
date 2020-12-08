@@ -12,8 +12,8 @@ export class Hub {
     return this.rest.getHub()
   }
 
-  async setLocalIpAddress(ipAddress: string) : Promise<void> {
-    return this.rest.hubSetLocalIpAddress(ipAddress)
+  async setLocalIpAddress(ipAddress: string, httpPort?: number, httpsPort?: number) : Promise<void> {
+    return this.rest.hubSetLocalIpAddress(ipAddress, httpPort, httpsPort)
   }
 
   async getUartKey() : Promise<string> {
