@@ -2,7 +2,7 @@ import {RequestorBase} from "../requestorBase";
 import {req} from "../../util/request";
 
 
-let filter = {searchParams: {filter: JSON.stringify({"include":["locations", "currentSwitchState", {"abilities":"properties"}, "behaviours"]})}}
+let filter = {searchParams: {filter: JSON.stringify({"include":["location", "currentSwitchState", {"abilities":"properties"}, "behaviours"]})}}
 
 export class CrownstoneRequests extends RequestorBase {
 
