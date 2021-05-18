@@ -5,7 +5,7 @@ type requestType = "POST" | "GET" | "DELETE" | "PUT" | "PATCH"
 const log = Logger(__filename);
 
 
-export async function req(type: requestType, url: string, options) : Promise<any> {
+export async function req(type: requestType, url: string, options, silent: boolean = false) : Promise<any> {
   let token = Math.floor(Math.random()*1e8).toString(36);
   logRequest(type, url, options, token);
   let result;
@@ -22,8 +22,11 @@ export async function req(type: requestType, url: string, options) : Promise<any
       case "PATCH":
         result = await got.patch(url, options); break;
     }
-    log.debug("Request result:", result.statusCode, result.body, token);
-    log.info("Request successful", result.statusCode, token);
+
+    if (silent === false) {
+      log.debug("Request result:", result.statusCode, result.body, token);
+      log.info("Request successful", result.statusCode, token);
+    }
     return result;
   }
   catch (err) {
