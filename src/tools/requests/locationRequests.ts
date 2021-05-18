@@ -1,5 +1,4 @@
 import {RequestorBase} from "../requestorBase";
-import {gotAllInSphere} from "../cache";
 import {req} from "../../util/request";
 
 

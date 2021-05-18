@@ -7,7 +7,9 @@ const log = Logger(__filename);
 
 export async function req(type: requestType, url: string, options, silent: boolean = false) : Promise<any> {
   let token = Math.floor(Math.random()*1e8).toString(36);
-  logRequest(type, url, options, token);
+  if (silent === false) {
+    logRequest(type, url, options, token);
+  }
   let result;
   try {
     switch (type) {
