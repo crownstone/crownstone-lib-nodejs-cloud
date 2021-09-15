@@ -14,7 +14,13 @@ export class Crownstone {
     return await this.rest.getCrownstone(this.stoneId)
   }
 
+  async getCurrentSwitchState() : Promise<number> {
+    return this.currentSwitchState();
+  }
+
+
   async currentSwitchState() : Promise<number> {
+    console.log("currentSwitchState is deprecated. Use getCurrentSwitchState instead.")
     let data = await this.rest.getCurrentSwitchState(this.stoneId);
     let switchState = data.switchState || 0;
     if (switchState > 0 && switchState <= 1) { return switchState*100 }
@@ -22,7 +28,7 @@ export class Crownstone {
   }
 
 
-  async setCurrentSwitchState(switchState) : Promise<void> {
+  async setCurrentSwitchState(switchState: number) : Promise<void> {
     await this.rest.setCurrentSwitchState(this.stoneId, switchState);
   }
 

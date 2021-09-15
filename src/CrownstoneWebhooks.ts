@@ -19,7 +19,7 @@ export class CrownstoneWebhooks {
     this.toolchain.tokenStore.webhooks.api_key = apiKey;
   }
 
-  setAdminKey(adminKey: string) {
+  _setAdminKey(adminKey: string) {
     this.toolchain.tokenStore.webhooks.admin_key = adminKey;
   }
 

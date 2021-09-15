@@ -39,7 +39,9 @@ export async function req(type: requestType, url: string, options, silent: boole
       let messageInBody = err.response.body?.err?.message;
       let codeInBody = err.response.body?.err?.code;
 
-      let error = {statusCode, body, message: messageInBody, code: codeInBody};
+      let error = {statusCode, ...body};
+      if (messageInBody) { err.message = messageInBody; }
+      if (codeInBody)    { err.code = codeInBody;       }
       if (silent === false) {
         log.error("Something went wrong with request", token, error);
       }
@@ -47,7 +49,6 @@ export async function req(type: requestType, url: string, options, silent: boole
     }
     else if (err.request) {
       // error during request
-
     }
     if (silent === false) {
       log.error("Something went wrong with request", token, err);
