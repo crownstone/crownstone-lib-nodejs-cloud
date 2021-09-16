@@ -23,12 +23,8 @@ export class CrownstoneWebhooks {
     this.toolchain.tokenStore.webhooks.admin_key = adminKey;
   }
 
-  async isListenerActiveByToken(token: string) : Promise<boolean> {
-    return await this.rest.isListenerActive(token)
-  }
-
-  async isListenerActiveByUserId(userId: string) : Promise<boolean> {
-    return await this.rest.isListenerActive('', userId)
+  async isListenerActive(userId: string) : Promise<boolean> {
+    return await this.rest.isListenerActive(userId);
   }
 
   async createListener(userId: string, token: string, eventTypes: string[], url: string) : Promise<void> {
@@ -39,13 +35,12 @@ export class CrownstoneWebhooks {
     return await this.rest.getListeners();
   }
 
-  async removeListenerByToken(token: string) : Promise<void> {
-    return await this.rest.deleteListenerByToken(token);
-  }
   async removeListenerByUserId(userId: string) : Promise<void> {
     return await this.rest.deleteListenerByUserId(userId);
   }
 
-
+  async removeListenerById(listenerId: string) : Promise<void> {
+    return await this.rest.deleteListenerById(listenerId);
+  }
 
 }
