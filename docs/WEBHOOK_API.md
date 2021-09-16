@@ -2,7 +2,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">setApiKey(apiKey: string)</summary>
+<summary>setApiKey(apiKey: string)</summary>
 
 > Set your API key.
 > 
@@ -17,7 +17,7 @@
 >   
 </details>
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> isListenerActive(userId: string) : Promise&lt;boolean></summary>
+<summary><i>async</i> isListenerActive(userId: string) : Promise&lt;boolean></summary>
 
 > You can create multiple listeners using the same token, since you can choose different events or endpoints per listener.
 > This function helps you to determine if a listenerer with this userId (from the Crownstone Cloud) is already registered. This is scoped to your user.
@@ -39,7 +39,7 @@
 >   
 </details>
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> getListeners() : Promise&lt;cloud_EventListener[]></summary>
+<summary><i>async</i> getListeners() : Promise&lt;cloud_EventListener[]></summary>
 
 > Get an array of all listeners you have registered hooks for. This is scoped to your user.
 > 
@@ -54,7 +54,7 @@
 >   
 </details>
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> createListener(userId: string, token: string, eventTypes: string[], url: string)</summary>
+<summary><i>async</i> createListener(userId: string, token: string, eventTypes: string[], url: string)</summary>
 
 > Create an event listener for a Crownstone user. If an event belonging to the user is dispatched from the Cloud to the SSE server, it can be forwarded 
 > to a provided url.
@@ -84,7 +84,7 @@
 >
 </details>
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> removeListenerByUserId(userId: string)</summary>
+<summary><i>async</i> removeListenerByUserId(userId: string)</summary>
 
 > Remove all listeners that have been registered with this Crownstone Cloud userId (within the scope of your user).
 >

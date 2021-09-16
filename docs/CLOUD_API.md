@@ -2,7 +2,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> login(email: string, password: string) : Promise&lt;UserLoginData></summary>
+<summary><i>async</i> login(email: string, password: string) : Promise&lt;UserLoginData></summary>
 
 > You use this method to login to the Crownstone Cloud. 
 > Your userId and accesstoken will be cached in the CrownstoneCloud class instance.
@@ -28,7 +28,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> loginHashed(email: string, hashedPassword: string) : Promise&lt;UserLoginData></summary>
+<summary><i>async</i> loginHashed(email: string, hashedPassword: string) : Promise&lt;UserLoginData></summary>
 
 > You use this method to login to the Crownstone Cloud. If you have cached a SHA1 hash of the user's password, you can use this method
 > to log in using that. The login method above will hash the plaintext password and use this method to login.
@@ -56,7 +56,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">hashPassword(plaintextPassword: string) : string</summary>
+<summary>hashPassword(plaintextPassword: string) : string</summary>
 
 > This will hash the password for you so you can use the loginHashed method with it.
 > 
@@ -76,7 +76,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> hubLogin(hubId: string, hubToken: string) : Promise&lt;HubLoginData></summary>
+<summary><i>async</i> hubLogin(hubId: string, hubToken: string) : Promise&lt;HubLoginData></summary>
 
 > You use this method to login to the Crownstone Cloud if you're a Crownstone hub. 
 > Your accesstoken will be cached in the CrownstoneCloud class instance.
@@ -101,7 +101,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">setAccessToken(accessToken: string, userId?: string)</summary>
+<summary>setAccessToken(accessToken: string, userId?: string)</summary>
 
 > This will authenticate you for the subsequent calls to the cloud. Does not do any request to the cloud itself.
 >
@@ -118,7 +118,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> spheres() : Promise&lt;cloud_Sphere[]></summary>
+<summary><i>async</i> spheres() : Promise&lt;cloud_Sphere[]></summary>
 
 > You use this method to download the data of your different spheres. Use this to get the sphereId you need for the sphere method.
 >
@@ -134,7 +134,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> locations() : Promise&lt;cloud_Location[]></summary>
+<summary><i>async</i> locations() : Promise&lt;cloud_Location[]></summary>
 
 > You use this method to download the data of your different locations. Use this to get the location id you need to get a specific location.
 >
@@ -150,7 +150,7 @@
  
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> crownstones() : Promise&lt;cloud_Stone[]></summary>
+<summary><i>async</i> crownstones() : Promise&lt;cloud_Stone[]></summary>
 
 > You use this method to download the data of your different locations. Use this to get the location id you need to get a specific location.
 >
@@ -166,7 +166,7 @@
  
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> keys() : Promise&lt;cloud_Stone[]></summary>
+<summary><i>async</i> keys() : Promise&lt;cloud_Stone[]></summary>
 
 > You use this method to download the data of your different locations. Use this to get the location id you need to get a specific location.
 >
@@ -183,7 +183,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">sphere(id: string) : Sphere</summary>
+<summary>sphere(id: string) : Sphere</summary>
 
  >You use this method if you want to get data related to the sphere. This does not request anything from the cloud by itself.
 >
@@ -202,7 +202,7 @@
 </details>
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">location(id: string) : Location</summary>
+<summary>location(id: string) : Location</summary>
 
 > You use this method if you want to get data related to the location. This does not request anything from the cloud by itself.
 >
@@ -222,7 +222,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">crownstone(id: string) : Crownstone</summary>
+<summary>crownstone(id: string) : Crownstone</summary>
 
 > You use this method if you want to get data related to the Crownstone. This does not request anything from the cloud by itself.
 >
@@ -243,7 +243,7 @@
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;">me() : User</summary>
+<summary>me() : User</summary>
 
 > Use this to get the user object, from which you can get you userId, userData and location.
 >
@@ -267,7 +267,7 @@
 This class is not meant to be created directly, you get this from the CrownstoneCloud. It represents a single Sphere.
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> data() : Promise&lt;cloud_Sphere></summary>
+<summary><i>async</i> data() : Promise&lt;cloud_Sphere></summary>
 
 > This method will get the sphere data from the cloud.
 >
@@ -284,7 +284,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> keys() : Promise&lt;cloud_Keys></summary>
+<summary><i>async</i> keys() : Promise&lt;cloud_Keys></summary>
 
 > Get the keys belonging to this sphere. These keys can be used for any bluetooth related operations.
 >
@@ -301,7 +301,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> locations() : Promise&lt;cloud_Location></summary>
+<summary><i>async</i> locations() : Promise&lt;cloud_Location></summary>
 
 > You use this method to download the data of the locations in your sphere.
 >
@@ -318,7 +318,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> crownstones() : Promise&lt;cloud_Stone></summary>
+<summary><i>async</i> crownstones() : Promise&lt;cloud_Stone></summary>
 
 > You use this method to download the data of the Crownstones in your sphere.
 >
@@ -335,7 +335,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> users() : Promise&lt;cloud_sphereUserDataSet></summary>
+<summary><i>async</i> users() : Promise&lt;cloud_sphereUserDataSet></summary>
 
 > Get all users in sphere, with their corresponding permission levels.
 >
@@ -352,7 +352,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> authorizationTokens() : Promise&lt;cloud_SphereAuthorizationTokens></summary>
+<summary><i>async</i> authorizationTokens() : Promise&lt;cloud_SphereAuthorizationTokens></summary>
 
 > Used for hubs to get the tokens identifying users.
 >
@@ -372,7 +372,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> presentPeople(ignoreDeviceId?: string) : Promise&lt;SpherePresentPeople></summary>
+<summary><i>async</i> presentPeople(ignoreDeviceId?: string) : Promise&lt;SpherePresentPeople></summary>
 
 > Used to get the locations of all users in the sphere. User devices (like phones) have locations. If a user has multiple devices, they can have multiple locations.
 > If the location array is empty, this means that they're in the sphere, but the indoor localization has not determined which room they are in.
@@ -398,7 +398,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> data() : Promise&lt;cloud_Location></summary>
+<summary><i>async</i> data() : Promise&lt;cloud_Location></summary>
 
 > This method will get the location data from the cloud.
 >
@@ -415,7 +415,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> crownstones() : Promise&lt;cloud_Stone></summary>
+<summary><i>async</i> crownstones() : Promise&lt;cloud_Stone></summary>
 
 > You use this method to download the data of the Crownstones in this location.
 >
@@ -436,7 +436,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> data() : Promise&lt;cloud_Stone></summary>
+<summary><i>async</i> data() : Promise&lt;cloud_Stone></summary>
 
 > This method will get the Crownstone data from the cloud.
 >
@@ -454,7 +454,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> getCurrentSwitchState() : Promise&lt;number></summary>
+<summary><i>async</i> getCurrentSwitchState() : Promise&lt;number></summary>
 
 > Get the last known switch state of a Crownstone. Keep in mind that a user can opt-out of sending the Crownstone state to the cloud via
 > the privacy settings in the Crownstone app.
@@ -471,7 +471,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 </details>
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> setCurrentSwitchState(percentage: number)</summary>
+<summary><i>async</i> setCurrentSwitchState(percentage: number)</summary>
 
 > Set the current switch state in the cloud. This will not switch the Crownstone, but it will update the database for the next time getCurrentSwitchState is called.
 >
@@ -486,7 +486,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 </details>
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> setSwitch(percentage: number)</summary>
+<summary><i>async</i> setSwitch(percentage: number)</summary>
 
 > Get the last known switch state of a Crownstone. Keep in mind that a user can opt-out of sending the Crownstone state to the cloud via
 > the privacy settings in the Crownstone app.
@@ -504,7 +504,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> turnOn()</summary>
+<summary><i>async</i> turnOn()</summary>
 
 > Turn the Crownstone on. If you have a twilight behaviour configured, the exact intensity will depend on the behaviour. If you want to fully turn on a Crownstone, use setSwitch.
 >
@@ -516,7 +516,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 </details>
 
 <details>
-<summary style="font-size: 16px; font-weight: bold;"><i>async</i> turnOff()</summary>
+<summary><i>async</i> turnOff()</summary>
 
 > Turn the Crownstone off.
 >
