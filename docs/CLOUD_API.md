@@ -247,10 +247,6 @@
 
 > Use this to get the user object, from which you can get you userId, userData and location.
 >
-> - Parameters
->   - **id**(string): A valid cloud Id of a Crownstone.
->
->
 > - Returns
 >   - **User**: This object allows you to get data related to your user.
 >
