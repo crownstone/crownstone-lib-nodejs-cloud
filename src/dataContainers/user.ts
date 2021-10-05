@@ -23,7 +23,7 @@ export class User {
     }
   }
 
-  async currentLocation() : Promise<cloud_UserLocation> {
+  async currentLocation() : Promise<cloud_UserLocation[]> {
     let userId = await this.id();
     return this.rest.getCurrentLocation(userId);
   }

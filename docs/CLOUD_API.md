@@ -441,7 +441,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > This method will get the Crownstone data from the cloud.
 >
 > - Returns
->   - **cloud_Stone**:  JSON containing the data of this Crownstone. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
+    >   - **cloud_Stone**:  JSON containing the data of this Crownstone. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
 >
 >
 > - Example
@@ -460,7 +460,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > the privacy settings in the Crownstone app.
 >
 > - Returns
->   - **number**:  the current switchstate between 0 and 100.
+    >   - **number**:  the current switchstate between 0 and 100.
 >
 >
 > - Example
@@ -476,7 +476,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > Set the current switch state in the cloud. This will not switch the Crownstone, but it will update the database for the next time getCurrentSwitchState is called.
 >
 > - Parameters
->   - **percentage**(number): value between 0 and 100.
+    >   - **percentage**(number): value between 0 and 100.
 >
 > - Example
 >   ```js
@@ -492,7 +492,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > the privacy settings in the Crownstone app.
 >
 > - Parameters
->   - **percentage**(number): value between 0 and 100. If the Crownstone cannot dim, all values larger than 0 will turn on the Crownstone via the relay.
+    >   - **percentage**(number): value between 0 and 100. If the Crownstone cannot dim, all values larger than 0 will turn on the Crownstone via the relay.
 >
 > - Example
 >   ```js
@@ -504,7 +504,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 
 
 <details>
-<summary><i>async</i> turnOn()</summary>
+<summary><i>async</i> turnOn() : Promise&lt;void></summary>
 
 > Turn the Crownstone on. If you have a twilight behaviour configured, the exact intensity will depend on the behaviour. If you want to fully turn on a Crownstone, use setSwitch.
 >
@@ -516,7 +516,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 </details>
 
 <details>
-<summary><i>async</i> turnOff()</summary>
+<summary><i>async</i> turnOff() : Promise&lt;void></summary>
 
 > Turn the Crownstone off.
 >
@@ -526,3 +526,61 @@ This class is not meant to be created directly, you get this from the Crownstone
 >   await crownstone.turnOff();
 >   ```
 </details>
+
+
+### User
+This class is not meant to be created directly, you get this from the CrownstoneCloud. It represents you as a User.
+
+
+<details>
+<summary><i>async</i> data() : Promise&lt;cloud_UserData></summary>
+
+> This method will get the User data from the cloud.
+>
+> - Returns
+    >   - **cloud_UserData**:  JSON containing the data of this User. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
+>
+>
+> - Example
+>   ```js
+>   let user     = cloud.me();
+>   let userData = await user.data();
+>   ```
+</details>
+
+
+<details>
+<summary><i>async</i> id() : Promise&lt;string></summary>
+
+> This will return the userId of your used
+>
+> - Returns
+    >   - **string**:  the database id of your user.
+>
+>
+> - Example
+>   ```js
+>   let user   = cloud.me();
+>   let userId = await user.id();
+>   ```
+</details>
+
+<details>
+<summary><i>async</i> currentLocation() : Promise&lt;cloud_UserLocation[]></summary>
+
+> Get your current location, based on the devices you have. Each device can be in a different location. Keep in mind that the user can opt-out of sharing his/her location with the cloud. If the app's privacy settings allow sharing location, this endpoint will have data if you're in a sphere or room that you're a part of.
+>
+>If you require a notification when location changes, take a look at the server-sent events. Do not poll this endpoint for changes!
+>
+>If you'd like to know the location of the people in a Sphere, take a look at the presentPeople endpoint below in the Sphere section.
+>
+> - Parameters
+>   - **cloud_UserLocation[]**: array of JSON objects describing the current location of the user's devices.  [Type definition found here.](../src/declarations/cloudTypes.d.ts)
+> 
+> - Example
+>   ```js
+>   let user         = cloud.me();
+>   let userLocation = await user.currentLocation();
+>   ```
+</details>
+
