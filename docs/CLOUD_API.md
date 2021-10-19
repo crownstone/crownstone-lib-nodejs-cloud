@@ -437,7 +437,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > This method will get the Crownstone data from the cloud.
 >
 > - Returns
-    >   - **cloud_Stone**:  JSON containing the data of this Crownstone. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
+>   - **cloud_Stone**:  JSON containing the data of this Crownstone. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
 >
 >
 > - Example
@@ -456,7 +456,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > the privacy settings in the Crownstone app.
 >
 > - Returns
-    >   - **number**:  the current switchstate between 0 and 100.
+>   - **number**:  the current switchstate between 0 and 100.
 >
 >
 > - Example
@@ -472,7 +472,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > Set the current switch state in the cloud. This will not switch the Crownstone, but it will update the database for the next time getCurrentSwitchState is called.
 >
 > - Parameters
-    >   - **percentage**(number): value between 0 and 100.
+>   - **percentage**(number): value between 0 and 100.
 >
 > - Example
 >   ```js
@@ -484,11 +484,12 @@ This class is not meant to be created directly, you get this from the Crownstone
 <details>
 <summary><i>async</i> setSwitch(percentage: number)</summary>
 
-> Get the last known switch state of a Crownstone. Keep in mind that a user can opt-out of sending the Crownstone state to the cloud via
-> the privacy settings in the Crownstone app.
+> Switch the Crownstone to a certain percentage. If the Crownstone cannot dim, all values larger than 0 will turn on the Crownstone via the relay.
+> 
+> Enabling dimming on a Crownstone is done via the Crownstone app.
 >
 > - Parameters
-    >   - **percentage**(number): value between 0 and 100. If the Crownstone cannot dim, all values larger than 0 will turn on the Crownstone via the relay.
+>   - **percentage**(number): value between 0 and 100. 
 >
 > - Example
 >   ```js
@@ -534,7 +535,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > This method will get the User data from the cloud.
 >
 > - Returns
-    >   - **cloud_UserData**:  JSON containing the data of this User. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
+>   - **cloud_UserData**:  JSON containing the data of this User. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
 >
 >
 > - Example
@@ -551,7 +552,7 @@ This class is not meant to be created directly, you get this from the Crownstone
 > This will return the userId of your used
 >
 > - Returns
-    >   - **string**:  the database id of your user.
+>   - **string**:  the database id of your user.
 >
 >
 > - Example
