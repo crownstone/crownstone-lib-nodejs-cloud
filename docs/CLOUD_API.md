@@ -152,7 +152,7 @@
 <details>
 <summary><i>async</i> crownstones() : Promise&lt;cloud_Stone[]></summary>
 
-> You use this method to download the data of your different locations. Use this to get the location id you need to get a specific location.
+> You use this method to download the data of your different Crownstones. You can use this to get the crownstone id you need to send commands to it.
 >
 > - Returns
 >   - **cloud_Stone[]**: JSON containing the data for all crownstones available to you. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
@@ -166,9 +166,9 @@
  
 
 <details>
-<summary><i>async</i> keys() : Promise&lt;cloud_Stone[]></summary>
+<summary><i>async</i> keys() : Promise&lt;cloud_Keys[]></summary>
 
-> You use this method to download the data of your different locations. Use this to get the location id you need to get a specific location.
+> You use this method to get the BLE encryption keys you have access too, as well as the sphereAuthorizationToken which you need to login to your hub (if you have one).
 >
 > - Returns
 >   - **cloud_Keys[]**: JSON containing keys for all spheres. [Type definition found here.](../src/declarations/cloudTypes.d.ts)
