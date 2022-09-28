@@ -14,10 +14,12 @@ export class CrownstoneCloud {
 
   toolchain : Toolchain;
   rest: CloudRequestorInterface;
+  restV2: CloudRequestorInterface;
 
   constructor(customEndpoint?:string) {
     this.toolchain = new Toolchain();
-    this.rest = this.toolchain.getCloudRequestor(customEndpoint);
+    this.rest   = this.toolchain.getCloudRequestor(customEndpoint);
+    this.restV2 = this.toolchain.getCloudV2Requestor(customEndpoint);
   }
 
   async login(email: string, password: string) : Promise<UserLoginData> {
@@ -84,7 +86,7 @@ export class CrownstoneCloud {
 
   sphere(id: string) : Sphere {
     if (!id) { throw new Error("Sphere ID is mandatory!"); }
-    return new Sphere(this.rest, id);
+    return new Sphere(this.rest, this.restV2, id);
   }
 
   location(id: string) : Location {
@@ -94,7 +96,7 @@ export class CrownstoneCloud {
 
   crownstone(id: string) : Crownstone {
     if (!id) { throw new Error("Crownstone ID is mandatory!"); }
-    return new Crownstone(this.rest, id);
+    return new Crownstone(this.rest, this.restV2, id);
   }
 
   me() : User {

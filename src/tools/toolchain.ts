@@ -1,5 +1,11 @@
 import { TokenStore } from "./tokens";
-import {CloudRequestor, CloudRequestorInterface, WebhookRequestor, WebhookRequestorInterface} from "./requestors";
+import {
+  CloudRequestor,
+  CloudRequestorInterface,
+  CloudRequestorV2,
+  WebhookRequestor,
+  WebhookRequestorInterface
+} from "./requestors";
 import { CacheStorage } from "./cache";
 
 
@@ -27,12 +33,17 @@ export class Toolchain {
     this.tokenStore.cloudHub.hubId       = hubId;
     this.tokenStore.cloudHub.hubToken    = hubToken;
   }
+
   loadHubSphereId(sphereId: string) {
     this.tokenStore.cloudHub.sphereId = sphereId;
   }
 
   getCloudRequestor(customEndpoint?: string) : CloudRequestorInterface {
     return new CloudRequestor(this.tokenStore, this.cache, customEndpoint).interface()
+  }
+
+  getCloudV2Requestor(customEndpoint?: string) : CloudRequestorInterface {
+    return new CloudRequestorV2(this.tokenStore, this.cache, customEndpoint).interface()
   }
 
   getWebhookRequestor(customEndpoint?: string) : WebhookRequestorInterface {

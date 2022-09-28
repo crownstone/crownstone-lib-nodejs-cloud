@@ -56,12 +56,9 @@ export class SphereRequests extends RequestorBase {
     return body as any;
   }
 
-  async uploadEnergyMeasurementData(energyMeasurementData: EnergyMeasurementData) : Promise<void> {
-    if (this.tokenStore.cloudHub.sphereId === undefined) {
-      await this.getHubSphereId();
-    }
-    await req("POST",`${this.endpoint}Spheres/${this.tokenStore.cloudHub.sphereId}/energyMeasurements`, this.addSecurity({ json: energyMeasurementData }));
-  }
+
+
+
 
 }
 

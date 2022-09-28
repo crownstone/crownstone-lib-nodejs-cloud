@@ -24,10 +24,6 @@ export class Hub {
     return this.rest.updateHub(data);
   }
 
-  async uploadEnergyMeasurements(measurementData: EnergyMeasurementData) : Promise<void> {
-    return this.rest.uploadEnergyMeasurementData(measurementData);
-  }
-
   async deleteHub() : Promise<Count> {
     return this.rest.deleteHub();
   }

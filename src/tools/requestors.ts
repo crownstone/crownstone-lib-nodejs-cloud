@@ -1,14 +1,17 @@
-import { TokenStore }         from "./tokens";
-import { CacheStorage }       from "./cache";
-import { Util }               from "../util/Util";
+import { TokenStore }           from "./tokens";
+import { CacheStorage }         from "./cache";
+import { Util }                 from "../util/Util";
 
-import { RequestorBase }      from "./requestorBase";
-import { CrownstoneRequests } from "./requests/crownstoneRequests";
-import { SphereRequests }     from "./requests/sphereRequests";
-import { UserRequests }       from "./requests/userRequests";
-import { HubRequests }        from "./requests/hubRequests";
-import { LocationRequests}    from "./requests/locationRequests";
-import {WebhookRequests} from "./requests/webhookRequests";
+import { RequestorBase }        from "./requestorBase";
+import { CrownstoneRequests }   from "./requests/crownstoneRequests";
+import { SphereRequests }       from "./requests/sphereRequests";
+import { UserRequests }         from "./requests/userRequests";
+import { HubRequests }          from "./requests/hubRequests";
+import { LocationRequests}      from "./requests/locationRequests";
+import { WebhookRequests }      from "./requests/webhookRequests";
+
+import { SphereV2Requests }     from "./requests/nextCloud/sphereV2Requests";
+import { CrownstoneV2Requests } from "./requests/nextCloud/crownstoneV2Requests";
 
 
 
@@ -34,12 +37,38 @@ export class CloudRequestor extends RequestorBase {
   }
 }
 
+
+export class CloudRequestorV2 extends RequestorBase {
+
+  constructor(tokenStore: TokenStore, cache: CacheStorage, customEndpoint: string = 'https://next.crownstone.rocks/api/') {
+    super(tokenStore, cache);
+    this.setEndpoint(customEndpoint);
+  }
+
+
+  isUser() : boolean {
+    return this.tokenStore.cloudUser.userId !== undefined;
+  }
+
+  isHub() : boolean {
+    return this.tokenStore.cloudHub.hubToken !== undefined;
+  }
+
+  interface() : CloudRequestorInterface {
+    // @ts-ignore
+    return this;
+  }
+}
+
+
 export interface CloudRequestorInterface extends CloudRequestor,
                                                  SphereRequests,
                                                  CrownstoneRequests,
                                                  LocationRequests,
                                                  UserRequests,
-                                                 HubRequests {}
+                                                 HubRequests,
+                                                 SphereV2Requests,
+                                                 CrownstoneV2Requests {}
 
 Util.applyMixins(CloudRequestor, [
   UserRequests,
@@ -47,6 +76,11 @@ Util.applyMixins(CloudRequestor, [
   HubRequests,
   SphereRequests,
   CrownstoneRequests
+])
+
+Util.applyMixins(CloudRequestorV2, [
+  SphereV2Requests,
+  CrownstoneV2Requests
 ])
 
 

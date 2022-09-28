@@ -27,7 +27,7 @@ export async function req(type: requestType, url: string, options, silent: boole
 
     if (silent === false) {
       log.debug("Request result:", result.statusCode, result.body, token);
-      log.info("Request successful", result.statusCode, token);
+      log.info("Request successful:", result.statusCode, token);
     }
     return result;
   }

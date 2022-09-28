@@ -2,11 +2,15 @@ import {CloudRequestorInterface} from "../tools/requestors";
 
 export class Crownstone {
 
-  rest : CloudRequestorInterface;
+
+
+  rest: CloudRequestorInterface;
+  restV2: CloudRequestorInterface;
   stoneId = null;
 
-  constructor(cloudRequestor: CloudRequestorInterface, stoneId: string) {
-    this.rest = cloudRequestor;
+  constructor(cloudRequestor: CloudRequestorInterface, cloudRequestorV2: CloudRequestorInterface, stoneId: string) {
+    this.rest     = cloudRequestor;
+    this.restV2   = cloudRequestorV2;
     this.stoneId = stoneId;
   }
 
@@ -59,5 +63,14 @@ export class Crownstone {
 
   async deleteCrownstone() : Promise<Count> {
     return this.rest.deleteCrownstone(this.stoneId);
+  }
+
+  async deleteEnergyData(start: Date | number | string, end: Date | number | string) : Promise<Count> {
+    start = new Date(start);
+    end   = new Date(end);
+
+    return this.restV2.deleteEnergyUsage(this.stoneId, start.toISOString(), end.toISOString());
+
+
   }
 }
