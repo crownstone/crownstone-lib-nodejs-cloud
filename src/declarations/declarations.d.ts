@@ -17,7 +17,6 @@ interface StoneSwitchData {
   percentage?: number
 }
 
-type timeISOString = string;
 
 interface EnergyMeasurementData {
   stoneId: string, t: timeISOString, energy: number
@@ -25,7 +24,7 @@ interface EnergyMeasurementData {
 interface EnergyReturnData {
   stoneId: string, timestamp: timeISOString, energyUsage: number
 }
-
+type timeISOString = string;
 type EnergyUsageRange = 'day' | 'week' | 'month' | 'year';
 
 type StoreReply = {

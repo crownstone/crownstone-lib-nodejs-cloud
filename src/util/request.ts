@@ -39,7 +39,7 @@ export async function req(type: requestType, url: string, options, silent: boole
       let messageInBody = err.response.body?.err?.message;
       let codeInBody = err.response.body?.err?.code;
 
-      let error = {statusCode, ...body};
+      let error = {statusCode, body};
       if (messageInBody) { err.message = messageInBody; }
       if (codeInBody)    { err.code = codeInBody;       }
       if (silent === false) {

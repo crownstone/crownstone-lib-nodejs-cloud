@@ -13,13 +13,13 @@ export class CrownstoneCloud {
   log = log;
 
   toolchain : Toolchain;
-  rest: CloudRequestorInterface;
+  rest:   CloudRequestorInterface;
   restV2: CloudRequestorInterface;
 
-  constructor(customEndpoint?:string) {
+  constructor(options: {customCloudAddress?: string, customCloudV2Address?: string} = {}) {
     this.toolchain = new Toolchain();
-    this.rest   = this.toolchain.getCloudRequestor(customEndpoint);
-    this.restV2 = this.toolchain.getCloudV2Requestor(customEndpoint);
+    this.rest   = this.toolchain.getCloudRequestor(  options?.customCloudAddress   ?? undefined);
+    this.restV2 = this.toolchain.getCloudV2Requestor(options?.customCloudV2Address ?? undefined);
   }
 
   async login(email: string, password: string) : Promise<UserLoginData> {
