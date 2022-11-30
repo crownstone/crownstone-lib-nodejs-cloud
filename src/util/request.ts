@@ -10,7 +10,11 @@ export async function req(type: requestType, url: string, options, silent: boole
   if (silent === false) {
     logRequest(type, url, options, token);
   }
+  if (options.timeout === undefined) {
+    options.timeout = 30000;
+  }
   let result;
+
   try {
     switch (type) {
       case "POST":
