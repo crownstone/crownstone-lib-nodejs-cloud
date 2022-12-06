@@ -1,8 +1,19 @@
 # crownstone-lib-nodejs-cloud
 
+Cloud module for the nodejs libs. It can obtain information from and send information to the Crownstone cloud.
+
+# Overview of the nodejs modules
+
+- https://github.com/crownstone/crownstone-lib-nodejs-core
+- https://github.com/crownstone/crownstone-lib-nodejs-uart
+- https://github.com/crownstone/crownstone-lib-nodejs-ble
+- https://github.com/crownstone/crownstone-lib-nodejs-cloud
+- https://github.com/crownstone/crownstone-lib-nodejs-sse
+
+# Intro
+
 This library is made up from 2 parts, one for the Crownstone Cloud and one for the Webhook API. 
 Most users won't need to use the webhook API, [but the documentation is available here.](./docs/WEBHOOK_API.md)
-
 
 # Installation
 
