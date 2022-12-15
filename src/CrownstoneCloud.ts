@@ -2,7 +2,7 @@ import {Toolchain} from "./tools/toolchain";
 import {CloudRequestorInterface} from "./tools/requestors";
 import {User} from "./dataContainers/user";
 import {Sphere} from "./dataContainers/sphere";
-import {Location} from "./dataContainers/Location";
+import {Location} from "./dataContainers/location";
 import {Crownstone} from "./dataContainers/crownstone";
 import {Hub} from "./dataContainers/hub";
 import {Logger} from "./Logger";
